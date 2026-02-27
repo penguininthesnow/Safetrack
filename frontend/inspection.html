@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/inspection.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <title>巡檢紀錄表 -- SafeTrack</title>
+</head>
+<body>
+
+<section class="top">
+    <div class="left" onclick="homepage()">SafeTrack</div>
+
+    <div class="right">
+        <div class="right_sign" onclick="openModal()" id="userArea">
+            <img src="images/signup.png" width="30" height="30">
+        </div>
+        <div class="right_note2" onclick="gotoInspection()">
+            <img src="images/note_2.png" width="30" height="30">
+        </div>
+    </div>
+</section>
+
+<h2>建立巡檢紀錄</h2>
+
+<div class="note">
+    巡檢地點:
+    <input type="text" id="location" class="location">
+
+    巡檢項目:
+    <input type="text" id="item" class="item">
+
+    是否異常?
+    <label>
+        <input type="checkbox" id="is_abnormal">
+        是
+        <input type="checkbox" id="is_abnormal">
+        否
+    </label>
+
+    項目描述:
+    <textarea id="description" class="description"></textarea>
+
+    <button onclick="createInspection()" class="submit">
+        送出
+    </button>
+</div>
+
+
+
+<!-- ----------------------footer-------------------------->
+<footer>
+    <div class="footer_text">
+        Copy Right @ 2026 Penguininthesnow.company 
+    </div>
+</footer>
+
+<script src="js/auth.js"></script>
+<script src="js/inspection.js"></script>
+    
+</body>
+</html>

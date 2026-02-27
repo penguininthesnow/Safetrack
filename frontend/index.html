@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <title>SafeTrack 工安巡檢與異常通知系統</title>
+</head>
+<body>
+
+<section class="top">
+    <div class="left" onclick="homepage()">SafeTrack</div>
+
+    <div class="right">
+        <div class="right_sign" onclick="openModal()" id="userArea">
+            <img src="images/signup.png" width="30" height="30">
+        </div>
+        <div class="right_note2" onclick="gotoInspection()">
+            <img src="images/note_2.png" width="30" height="30">
+        </div>
+    </div>
+</section>
+
+<div class="welcome_board">
+    <div class="line0">歡迎使用</div>
+    <div class="line1">SafeTrack -- 工安巡檢與異常通知系統</div>
+    <div class="line2">一起讓巡檢變得輕鬆吧!</div>
+</div>
+
+<hr />
+
+
+<section></section>
+
+</div>   
+
+
+<!------------------- 會員系統 -------------------------->
+<!-- 當會員登入視窗彈出，背景透明 -->
+<div id="modalbackdrop" class="modalbackdrop" style="display:none;"></div>
+
+<!-- 登入/註冊 -->
+<div id="authmodal" class="modal" style="display:none;">
+    
+    <button  class="close-btn" onclick="closeModal()">✕</button>
+    <h2 id="modalTitle">登入</h2>
+
+    <div id="usernameField"   class="form-row" style="display:none;">
+        <label>使用者名稱: </label>
+        <input type="text" id="modalUsername" placeholder="使用者名稱" />
+    </div>
+    信箱: <input type="email" id="modalEmail" placeholder="信箱" />
+    密碼: <input type="password" id="modalPassword" placeholder="密碼" />
+
+    <button onclick="submitAuth()">送出</button>
+
+    <p>
+        <span id="switchText">還沒有帳號?</span>
+        <a href="#" onclick="toggleMode()">點此註冊</a>
+    </p>
+</div>
+
+<!-- ----------------------footer-------------------------->
+<footer>
+    <div class="footer_text">
+        Copy Right @ 2026 Penguininthesnow.company 
+    </div>
+</footer>
+
+<script src="js/auth.js"></script>
+<script src="js/index.js"></script>
+
+
+</body>
+</html>

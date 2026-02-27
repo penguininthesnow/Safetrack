@@ -1,0 +1,63 @@
+/* ===== 全域設定 ===== */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f9;
+}
+
+/* ===== Header ===== */
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: #1e2a38;
+    color: white;
+}
+
+.left {
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
+.right_sign {
+    cursor: pointer;
+}
+
+.right_note2 {
+    cursor: pointer;
+}
+
+.right_sign img {
+    width: 35px;
+}
+
+.right_note2 img {
+    width: 35px;
+}
+
+/* ===== Header ===== */
+
+/* ===== Footer ===== */
+footer {
+    margin-top: 80px;
+    padding: 20px;
+    background-color: #1e2a38;
+    color: white;
+}
+
+.footer_text {
+    display: flex;
+    justify-content: center;
+}
+
+/* ===== Footer ===== */

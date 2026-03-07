@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/success.css" />
+    <link rel="stylesheet" type="text/css" href="css/inspection.css" />
     <link rel="stylesheet" type="text/css" href="css/common.css" />
-    <title>SafeTrack 工安巡檢與異常通知系統</title>
+    <title>巡檢紀錄表 -- SafeTrack</title>
 </head>
 <body>
-    
 <!-- 標題 -->
 <section class="top">
     <div class="left" onclick="homepage()">SafeTrack</div>
@@ -22,6 +22,27 @@
         </div>
     </div>
 </section>
+
+<!-- ==================================================== -->
+
+<!-- 主要介面 -->
+
+
+<section class="success-box">
+    <h2 id="successTitle"></h2> <!-- "巡檢完成" -->
+    <p id="statusText"></p> <!-- "異常與否" -->
+    <div id="inspectionNumber" class="inspectionNumber"></div> <!-- "巡檢編號" -->
+
+    <div class="links">
+        <a id="viewLink" class="viewLink">查看這筆紀錄</a>
+        <a href="inspection-history.html">前往歷史紀錄</a>
+    </div>
+</section>
+
+
+<!-- =========================================================== -->
+
+
 
 <!-- 漢堡選單設計 -->
 <div class="tag" id="tag" onclick="openSidebar()">
@@ -76,20 +97,6 @@
     </div>
 </div>
 
-<div class="welcome_board">
-    <div class="line0">歡迎使用</div>
-    <div class="line1">SafeTrack -- 工安巡檢與異常通知系統</div>
-    <div class="line2">一起讓巡檢變得輕鬆吧!</div>
-</div>
-
-<hr />
-
-
-<section></section>
-
-</div>   
-
-
 <!------------------- 會員系統 -------------------------->
 <!-- 當會員登入視窗彈出，背景透明 -->
 <div id="modalbackdrop" class="modalbackdrop" style="display:none;"></div>
@@ -97,7 +104,7 @@
 <!-- 登入/註冊 -->
 <div id="authmodal" class="modal" style="display:none;">
     
-    <span id="close-btn" class="close-btn" onclick="closeModal()">✕</span>
+    <button  class="close-btn" onclick="closeModal()">✕</button>
     <h2 id="modalTitle">登入</h2>
 
     <div id="usernameField"   class="form-row" style="display:none;">
@@ -125,8 +132,10 @@
 <script src="js/config.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/inspections.js"></script>
+<script src="js/success.js"></script>
 <script src="js/ui.js"></script>
+<script src="js/inspection-detail.js"></script>
 
-
+    
 </body>
 </html>

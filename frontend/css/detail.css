@@ -1,0 +1,52 @@
+body {
+    font-family: Arial;
+    background: #f4f6f8;
+}
+
+.inspection-detail {
+    width: 600px;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.inspection-card {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.inspection-card p {
+    margin: 10px 0;
+}
+
+img {
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 6px;
+}
+
+.back {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+/* 平板版 */
+@media (max-width:1200px) {
+    .inspection-detail {
+        width: 90%;
+    }
+
+    footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* 手機版 */
+@media (max-width:360px) {
+    .inspection-detail {
+        width: 80%;
+    }
+}

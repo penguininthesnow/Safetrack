@@ -240,3 +240,57 @@ footer {
     display: flex;
     justify-content: center;
 }
+
+/* 手機版 */
+@media (max-width:360px) {
+    .top {
+        padding: 10px;
+    }
+
+    .left {
+        font-size: 18px;
+    }
+
+    .right img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .tag {
+        top: 65px;
+        left: 10px;
+    }
+
+    .welcome_board {
+        margin-top: 30px;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .line0 {
+        font-size: 22px;
+    }
+
+    .line1 {
+        font-size: 16px;
+    }
+
+    .line2 {
+        font-size: 14px;
+    }
+
+    /* sidebar 手機版 */
+    .sidebar {
+        width: 220px;
+    }
+
+    .sidebar-content a {
+        font-size: 14px;
+    }
+
+    footer {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+}

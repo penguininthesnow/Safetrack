@@ -1,6 +1,9 @@
 
 let token = null;
 
+// const API_BASE = "http://127.0.0.1:8000";  // 開發用
+// const API_BASE = "https://penguinthesnow.com";  // 正式用
+
 async function submitAuth() {
     const email = document.getElementById("modalEmail").value.trim();
     const password = document.getElementById("modalPassword").value.trim();
@@ -14,7 +17,7 @@ async function submitAuth() {
             return;
         }
 
-        const response = await fetch("/api/users/register", {
+        const response = await fetch(`${API_BASE}/api/users/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -43,7 +46,7 @@ async function submitAuth() {
         formData.append("username", email);
         formData.append("password", password);
 
-        const response = await fetch("/api/users/login", {
+        const response = await fetch(`${API_BASE}/api/users/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -74,7 +77,7 @@ async function submitAuth() {
 async function fetchUserInfo() {
     const token = localStorage.getItem("token");
 
-    const response = await fetch("/api/users/member", {
+    const response = await fetch(`${API_BASE}/api/users/member`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${token}`
@@ -95,7 +98,7 @@ async function logout() {
 
     if (token) {
         try {
-            await fetch("/api/users/logout", {
+            await fetch(`${API_BASE}/api/users/logout`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`
@@ -113,6 +116,12 @@ async function logout() {
     resetModal();
     closeModal();
     updateUserUI();
+    closeSidebar(); // 登出時選單收起來
+
+    // 延遲一下讓動畫跑完
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 200);
 
     alert("已登出~");
 }
@@ -127,66 +136,11 @@ function resetModal() {
     document.getElementById("usernameField").style.display = "none";
 
     document.querySelector(".modal button").style.display = "block";
+    // document.querySelector("close-btn").style.display = "block";
 
     document.getElementById("switchText").innerText = "還沒有帳號?";
     document.querySelector(".modal a").innerText = "點此註冊";
     document.querySelector(".modal a").onclick = toggleMode;
-}
-
-// 巡檢區
-async function createInspection() {
-    const savedToken = localStorage.getItem("token");
-
-    if (!savedToken) {
-        openModal();
-        return;
-    }
-
-    const location = document.getElementById("location").value.trim();
-    const item = document.getElementById("item").value.trim();
-    const description = document.getElementById("description").value.trim();
-
-    if (!location || !item || !description) {
-        alert("巡檢資料未填寫完整，請重新確認!");
-        return;
-    }
-
-    const response = await fetch("/api/inspections/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${savedToken}`
-        },
-        body: JSON.stringify({
-            location: document.getElementById("location").value,
-            item: document.getElementById("item").value,
-            is_abnormal: document.getElementById("is_abnormal").checked,
-            description: document.getElementById("description").value
-        })
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-        document.getElementById("result").innerText =
-            "建立成功! ID: " + data.id;
-    } else {
-        document.getElementById("result").innerText =
-            "錯誤: " + data.detail;
-    }
-
-}
-
-function gotoInspection() {
-    const token = localStorage.getItem("token")
-
-    if (!token) {
-        openModal();
-        return;
-    }
-
-    // 已登入 => 導向巡檢頁
-    window.location.href = "inspection.html"
 }
 
 let authMode = "login";
@@ -205,6 +159,7 @@ function openModal() {
         document.getElementById("usernameField").style.display = "none";
 
         document.querySelector(".modal button").style.display = "none";
+        // document.querySelector(".close-btn").style.display = "none";
 
         document.getElementById("switchText").innerText = "";
         const link = document.querySelector(".modal a");
@@ -243,6 +198,7 @@ function updateUserUI() {
     const userArea = document.getElementById("userArea");
     const switchText = document.getElementById("switchText");
     const switchLink = document.querySelector(".modal a");
+    const token = localStorage.getItem("token");
 
     if (username) {
         userArea.innerText = username + "，您好";
@@ -258,24 +214,30 @@ function updateUserUI() {
         switchLink.innerText = "點此註冊";
         switchLink.onclick = toggleMode;
     }
+    // sidebar:讓登入時，顯示登出
+    if (token) {
+        document.getElementById("logoutArea").style.display = "block";
+    } else {
+        document.getElementById("logoutArea").style.display = "none";
+    }
 }
 
 // 刷新頁面
 window.onload = async function () {
-    const token = this.localStorage.getItem("token");
-    if (token && !this.localStorage.getItem("username")) {
+    const token = localStorage.getItem("token");
+    if (token && !localStorage.getItem("username")) {
         await fetchUserInfo();
     }
     updateUserUI();
 };
 
-if (window.location.pathname.includes("inspection.html")) {
+document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("token");
 
-    if (!token) {
+    if (window.location.pathname.includes("inspection.html") && !token) {
         window.location.href = "index.html";
     }
-}
+});
 
 function homepage() {
     window.location.href = "index.html";

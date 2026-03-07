@@ -1,0 +1,171 @@
+.inspection_board {
+    background: white;
+    width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+
+.location_title {
+    margin-top: 20px;
+}
+
+.item_title {
+    margin-top: 20px;
+}
+
+.is_abnormmal_title {
+    margin-top: 20px;
+}
+
+
+.location,
+.item,
+.description,
+#modalUsername,
+#modalEmail,
+#modalPassword {
+    margin: 10px 0;
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.note_title {
+    margin-top: 20px;
+}
+
+.description {
+    height: 80px;
+    resize: none;
+}
+
+.photo_title {
+    margin-bottom: 10px;
+}
+
+.submit {
+    margin-top: 15px;
+    /* margin-left: 500px; */
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #1e2a38;
+    color: white;
+    cursor: pointer;
+
+    display: flex;
+    align-content: flex-end;
+}
+
+.submit:hover {
+    background-color: #2f3f52;
+}
+
+/* 平板介面:<1200px*/
+@media (max-width:1200px) {
+
+    .inspection_board {
+        width: 80%;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    .note {
+        padding: 10px;
+    }
+
+    .note input,
+    .note textarea {
+        font-size: 15px;
+    }
+
+    .submit {
+        /* width: 200px; */
+        align-self: center;
+    }
+
+}
+
+/* 平板介面:<1200px*/
+@media (max-width:600px) {
+
+    .top {
+        padding: 20px;
+    }
+
+    .inspection_board {
+        width: 70%;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    .note {
+        padding: 10px;
+    }
+
+    .note input,
+    .note textarea {
+        font-size: 15px;
+    }
+
+    .submit {
+        /* width: 200px; */
+        align-self: center;
+    }
+
+}
+
+/* 手機版 */
+@media (max-width:360px) {
+
+    .inspection_board {
+        width: 70%;
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    .inspection_board h2 {
+        font-size: 25px;
+        text-align: center;
+    }
+
+    .note {
+        padding: 10px;
+    }
+
+    /* .location {
+        width: 300px;
+    } */
+
+    .note input,
+    .note textarea {
+        font-size: 14px;
+    }
+
+    .date_title,
+    .location_title,
+    .item_title,
+    .is_abnormmal_title,
+    .note_title,
+    .photo_title {
+        font-size: 14px;
+    }
+
+    .is_abnormmal_title label {
+        display: flex;
+        /* flex-direction: column; */
+    }
+
+    .submit {
+        /* width: 100%; */
+        margin-top: 10px;
+    }
+
+}

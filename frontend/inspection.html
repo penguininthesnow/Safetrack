@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<!-- 標題 -->
 <section class="top">
     <div class="left" onclick="homepage()">SafeTrack</div>
 
@@ -22,32 +23,122 @@
     </div>
 </section>
 
-<h2>建立巡檢紀錄</h2>
+<!-- ======================================================= -->
 
-<div class="note">
-    巡檢地點:
-    <input type="text" id="location" class="location">
+<!-- 巡檢表單 -->
+<section class="inspection_board">
+    <h2>建立巡檢紀錄</h2>
 
-    巡檢項目:
-    <input type="text" id="item" class="item">
+    <div class="note">
+        <div class="date_title">巡檢日期: </div>
+        <input type="date" id="date" class="date">
 
-    是否異常?
-    <label>
-        <input type="checkbox" id="is_abnormal">
-        是
-        <input type="checkbox" id="is_abnormal">
-        否
-    </label>
+        <div class="location_title">巡檢地點: </div> 
+        <input type="text" id="location" class="location">
 
-    項目描述:
-    <textarea id="description" class="description"></textarea>
+        <div class="item_title">巡檢項目: </div>
+        <input type="text" id="item" class="item">
 
-    <button onclick="createInspection()" class="submit">
-        送出
-    </button>
+        <div class="is_abnormmal_title">是否異常?</div>
+        <label>
+            <input type="radio" name="abnormal" value="true" id="abnormal_yes">
+            是
+        </label>
+        <label>
+            <input type="radio" name="abnormal" value="false" id="abnormal_no" checked>
+            否
+        </label>
+
+        <div class="note_title">異常事項/內容描述: </div>
+        <textarea id="description" class="description"></textarea>
+
+        <div class="photo_title">現場照片: </div>
+        <input type="file" id="photo" accept="image/*">
+
+        <button onclick="createInspection()" class="submit">
+            送出
+        </button>
+    </div>
+</section>
+<!-- ================================================== -->
+
+<!-- 漢堡選單設計 -->
+<div class="tag" id="tag" onclick="openSidebar()">
+    <img src="images/menu.png" width="30px" height="30px" />
+</div>
+<!-- 漢堡選單內容設計 -->
+  <!-- Sidebar 背景遮罩 -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+<!-- Sidebar 主體 -->
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-content">
+        <h3>功能選單</h3>
+
+        <a href="index.html">首頁</a>
+        <!-- 巡檢系統 主項目 -->
+        <div class="menu-item has-submenu">
+            <div class="menu-link" onclick="handleInspectionClick(event)">
+                巡檢系統 <img src="images/right_arrow.png" width="10px" height="10px" />
+            </div>
+            <!-- 第一層子選單 -->
+            <div class="submenu">
+                <a href="#" onclick="goCreateInspection(event)">
+                    建立巡檢紀錄
+                </a>
+
+                <div class="submenu-item has-submenu-right">
+                    <div class="submenu-link" onclick="goHistoryPage(event)">
+                        查詢巡檢紀錄 <img src="images/right_arrow.png" width="10px" height="10px" />
+                    </div>
+                    <!-- 第二層 右側滑出 -->
+                    <div class="submenu-right">
+                        <a href="#" onclick="goHistoryYear(event)">
+                            查詢歷年巡檢紀錄
+                        </a>
+                        <div class="submenu-right-year" id="yearList">
+                            <!-- JS動態生成年份 -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <a href="#">異常紀錄</a>
+        <a href="#">通知設定</a>
+
+        <div id="logoutArea" style="display:none;">
+            <hr>
+            <button class="logout-btn" onclick="logout()">登出</button>
+        </div>
+    </div>
 </div>
 
+<!------------------- 會員系統 -------------------------->
+<!-- 當會員登入視窗彈出，背景透明 -->
+<div id="modalbackdrop" class="modalbackdrop" style="display:none;"></div>
 
+<!-- 登入/註冊 -->
+<div id="authmodal" class="modal" style="display:none;">
+    
+    <button  class="close-btn" onclick="closeModal()">✕</button>
+    <h2 id="modalTitle">登入</h2>
+
+    <div id="usernameField"   class="form-row" style="display:none;">
+        <label>使用者名稱: </label>
+        <input type="text" id="modalUsername" placeholder="使用者名稱" />
+    </div>
+    信箱: <input type="email" id="modalEmail" placeholder="信箱" />
+    密碼: <input type="password" id="modalPassword" placeholder="密碼" />
+
+    <button onclick="submitAuth()">送出</button>
+
+    <p>
+        <span id="switchText">還沒有帳號?</span>
+        <a href="#" onclick="toggleMode()">點此註冊</a>
+    </p>
+</div>
 
 <!-- ----------------------footer-------------------------->
 <footer>
@@ -56,8 +147,11 @@
     </div>
 </footer>
 
+<script src="js/config.js"></script>
 <script src="js/auth.js"></script>
-<script src="js/inspection.js"></script>
+<script src="js/inspections.js"></script>
+<script src="js/ui.js"></script>
+
     
 </body>
 </html>

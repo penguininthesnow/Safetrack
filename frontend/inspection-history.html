@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/inspection.css" />
     <link rel="stylesheet" type="text/css" href="css/common.css" />
-    <title>SafeTrack 工安巡檢與異常通知系統</title>
+    <title>查詢歷史巡檢紀錄 -- SafeTrack</title>
 </head>
 <body>
-    
+
 <!-- 標題 -->
 <section class="top">
     <div class="left" onclick="homepage()">SafeTrack</div>
@@ -22,6 +22,21 @@
         </div>
     </div>
 </section>
+
+<!-- =================================================== -->
+
+
+<!-- 分頁設計 -->
+<div class="tabs">
+    <button onclick="showTab('records')">當年巡檢紀錄</button>
+    <button onclick="showTab('stats')">異常統計圖表</button>
+</div>
+
+<div id="records"></div>
+<div id="stats" style="display:none;"></div>
+
+<!-- ================================================= -->
+
 
 <!-- 漢堡選單設計 -->
 <div class="tag" id="tag" onclick="openSidebar()">
@@ -76,20 +91,6 @@
     </div>
 </div>
 
-<div class="welcome_board">
-    <div class="line0">歡迎使用</div>
-    <div class="line1">SafeTrack -- 工安巡檢與異常通知系統</div>
-    <div class="line2">一起讓巡檢變得輕鬆吧!</div>
-</div>
-
-<hr />
-
-
-<section></section>
-
-</div>   
-
-
 <!------------------- 會員系統 -------------------------->
 <!-- 當會員登入視窗彈出，背景透明 -->
 <div id="modalbackdrop" class="modalbackdrop" style="display:none;"></div>
@@ -97,7 +98,7 @@
 <!-- 登入/註冊 -->
 <div id="authmodal" class="modal" style="display:none;">
     
-    <span id="close-btn" class="close-btn" onclick="closeModal()">✕</span>
+    <button  class="close-btn" onclick="closeModal()">✕</button>
     <h2 id="modalTitle">登入</h2>
 
     <div id="usernameField"   class="form-row" style="display:none;">
@@ -115,6 +116,7 @@
     </p>
 </div>
 
+
 <!-- ----------------------footer-------------------------->
 <footer>
     <div class="footer_text">
@@ -122,11 +124,13 @@
     </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/config.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/inspections.js"></script>
 <script src="js/ui.js"></script>
-
-
+<script src="js/history.js"></script>
+<script src="js/dashboard.js"></script>
+    
 </body>
 </html>

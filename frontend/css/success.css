@@ -1,0 +1,52 @@
+.success-box {
+    width: 700px;
+
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}
+
+.links {
+    margin-top: 20px;
+}
+
+footer {
+    display: flex;
+    flex: 1 0 auto;
+    flex-shrink: 0;
+}
+
+.footer_text {
+    display: flex;
+    margin: 0;
+    padding-top: 20px;
+    align-self: flex-start;
+    justify-content: center;
+}
+
+/* 平板版 */
+@media (max-width:1200px) {
+    .success-box {
+        width: 90%;
+    }
+
+
+}
+
+/* 手機版 */
+@media (max-width:360px) {
+    .success-box {
+        width: 80%;
+    }
+
+    .links {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .viewLink {
+        margin-bottom: 10px;
+    }
+}

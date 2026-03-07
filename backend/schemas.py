@@ -25,11 +25,12 @@ class UserOut(BaseModel):
 
 # Inspections schema
 class InspectionBase(BaseModel):
-    date: Optional[date] = None
+    date: date
     location: str
     item: str
     is_abnormal: bool
     description: Optional[str] = None
+    inspection_number: str
 
 class InspectionCreate(BaseModel):
     pass
@@ -40,9 +41,11 @@ class InspectionUpdate(BaseModel):
     is_abnormal: Optional[bool]
     description: Optional[str]
 
+# 系統產生欄位
 class InspectionOut(InspectionBase):
     id: int
     created_by: int
+    inspection_number: str
 
     class Config:
         orm_mode = True

@@ -29,3 +29,9 @@ app.mount("/static", StaticFiles(directory="frontend"), name="static")
 @app.get("/")
 def serve_frontend():
     return FileResponse("frontend/index.html")
+
+import os
+
+print("AWS_REGION =", os.getenv("AWS_REGION"))
+print("S3_BUCKET_NAME =", os.getenv("S3_BUCKET_NAME"))
+print("HAS ACCESS KEY =", bool(os.getenv("AWS_ACCESS_KEY_ID")))

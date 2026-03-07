@@ -18,13 +18,17 @@ class User(Base):
 class Inspection(Base):
     __tablename__ = "inspections"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, index=True)
+    year = Column(Integer) # 110~115
     date = Column(Date)
     location = Column(String(255))
     item = Column(String(255))
-    is_abnormal = Column(Boolean)
+    is_abnormal = Column(Boolean, default=False)
+    abnormal_count = Column(Integer, default=0)
     description = Column(Text)
     created_by = Column(Integer, ForeignKey("users.id"))
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    image_url = Column(String(255)) # 存照片連結
+    inspection_number = Column(String(13), unique=True, index=True)
 
     owner = relationship("User", back_populates="inspections")

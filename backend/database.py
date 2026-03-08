@@ -4,7 +4,8 @@ from sqlalchemy.orm import sessionmaker
 import os 
 from dotenv import load_dotenv
 
-load_dotenv()
+# 指定路徑到上層 Safetrack
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../.env"))
 
 DB_URL = os.getenv("DATABASE_URL")
 

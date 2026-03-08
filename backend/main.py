@@ -44,6 +44,12 @@ def serve_frontend():
 def serve_index():
     return FileResponse(os.path.join(frontend_path, "index.html"))
 
+# 原本 frontend_path 已經定義好了
+html_files = ["index.html", "inspection.html", "inspection-history.html", "inspection-success.html", "inspection-detail.html"]  # 把你所有 HTML 加進來
+
+for html_file in html_files:
+    app.get(f"/{html_file}")(lambda file=html_file: FileResponse(os.path.join(frontend_path, file)))
+
 
 
 print("AWS_REGION =", os.getenv("AWS_REGION"))

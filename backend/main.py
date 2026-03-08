@@ -40,6 +40,10 @@ app.include_router(inspections.router)
 def serve_frontend():
     return FileResponse(os.path.join(frontend_path, "index.html"))
 
+@app.get("/index.html")
+def serve_index():
+    return FileResponse(os.path.join(frontend_path, "index.html"))
+
 
 
 print("AWS_REGION =", os.getenv("AWS_REGION"))

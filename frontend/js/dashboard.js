@@ -3,7 +3,7 @@
 
 // 異常分析圖表
 function loadStats(year) {
-    fetch(`/api/inspections/${year}/stats`)
+    fetch(`${API_BASE}/inspections/${year}/stats`)
         .then(res => res.json())
         .then(data => {
             const ctx = document.getElementById('chart');

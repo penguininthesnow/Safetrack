@@ -1,6 +1,6 @@
 // 歷史資料
 function yearList(year) {
-    fetch(`${API_BASE}/api/inspections/${year}`)
+    fetch(`${API_BASE}/inspections/${year}`)
         .then(res => res.json())
         .then(data => {
             renderTable(data)
@@ -9,7 +9,7 @@ function yearList(year) {
 
 // 動態載入年份清單
 async function loadYears() {
-    const response = await fetch(`${API_BASE}/api/inspections/years`);
+    const response = await fetch(`${API_BASE}/inspections/years`);
     const years = await response.json();
 
     const container = document.getElementById("yearList");

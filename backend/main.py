@@ -2,11 +2,12 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.database import Base, engine
+from backend import models
 from backend.routers import users, inspections
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from backend.database import engine
-from fastapi.staticfiles import StaticFiles
+# from fastapi.staticfiles import StaticFiles
 
 
 print(engine.url) #查找資料庫
@@ -44,14 +45,18 @@ def serve_frontend():
 def serve_index():
     return FileResponse(os.path.join(frontend_path, "index.html"))
 
-# 原本 frontend_path 已經定義好了
-html_files = ["index.html", "inspection.html", "inspection-history.html", "inspection-success.html", "inspection-detail.html"]  # 把你所有 HTML 加進來
-
-for html_file in html_files:
-    app.get(f"/{html_file}")(lambda file=html_file: FileResponse(os.path.join(frontend_path, file)))
-
-
 
 print("AWS_REGION =", os.getenv("AWS_REGION"))
 print("S3_BUCKET_NAME =", os.getenv("S3_BUCKET_NAME"))
 print("HAS ACCESS KEY =", bool(os.getenv("AWS_ACCESS_KEY_ID")))
+
+
+
+
+
+
+# 原本 frontend_path 已經定義好了
+# html_files = ["index.html", "inspection.html", "inspection-history.html", "inspection-success.html", "inspection-detail.html"]  # 把你所有 HTML 加進來
+
+# for html_file in html_files:
+#     app.get(f"/{html_file}")(lambda file=html_file: FileResponse(os.path.join(frontend_path, file)))ㄋ

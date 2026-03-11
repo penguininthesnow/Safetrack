@@ -1,6 +1,7 @@
 FROM python:3.12-slim
 
 WORKDIR /app
+COPY .env /app/.env
 COPY ./backend /app/backend
 COPY ./frontend /app/frontend
 COPY requirements.txt /app/

@@ -88,8 +88,8 @@ def create_inspection(
         
     # LINE Notify 異常提醒
     if new_inspection.is_abnormal:
-        # inspection_url = f"https://safetrack.com/inspection-history?number={new_inspection.inspection_number}"
-        inspection_url = f"http://127.0.0.1:8000/static/inspection-history?number={new_inspection.inspection_number}"
+        inspection_url = f"https://penguinthesnow.com/inspection-history?number={new_inspection.inspection_number}"
+        # inspection_url = f"http://127.0.0.1:8000/static/inspection-history?number={new_inspection.inspection_number}"
 
         message = f"""
         Safetrack 巡檢異常!

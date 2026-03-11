@@ -34,7 +34,7 @@ async function createInspection() {
     }
 
     // 利用response 檢查回傳錯誤
-    const response = await fetch(`${API_BASE}/api/inspections/`, {
+    const response = await fetch(`${API_BASE}/inspections/`, {
         method: "POST",
         headers: {
             "Authorization": `Bearer ${savedToken}`

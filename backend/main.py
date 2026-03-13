@@ -1,8 +1,7 @@
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+# from fastapi.responses import FileResponse
 
 from backend.database import Base, engine
 from backend import models
@@ -15,10 +14,10 @@ print(engine.url) #查找資料庫
 app = FastAPI(title="SafeTrack API")
 
 # frontend path
-frontend_path = os.path.join(os.path.dirname(__file__), "../frontend")
+# frontend_path = os.path.join(os.path.dirname(__file__), "../frontend")
 
 # static files
-app.mount("/static", StaticFiles(directory=frontend_path), name="static")
+# app.mount("/static", StaticFiles(directory=frontend_path), name="static")
 
 # CORS
 app.add_middleware(
@@ -26,7 +25,10 @@ app.add_middleware(
     allow_origins=[
         "https://www.penguinthesnow.com",
         "https://penguinthesnow.com",
-        "http://localhost:8000"
+        "http://www.penguinthesnow.com",
+        "http://penguinthesnow.com",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000"
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -42,13 +44,13 @@ app.include_router(users.router)
 app.include_router(inspections.router)
 
 # frontend routes
-@app.get("/")
-def serve_frontend():
-    return FileResponse(os.path.join(frontend_path, "index.html"))
+# @app.get("/")
+# def serve_frontend():
+#     return FileResponse(os.path.join(frontend_path, "index.html"))
 
-@app.get("/index.html")
-def serve_index():
-    return FileResponse(os.path.join(frontend_path, "index.html"))
+# @app.get("/index.html")
+# def serve_index():
+#     return FileResponse(os.path.join(frontend_path, "index.html"))
 
 # debug
 print("AWS_REGION =", os.getenv("AWS_REGION"))

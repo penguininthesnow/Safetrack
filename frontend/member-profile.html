@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/inspection.css" />
+    <title>會員資料 -- SafeTrack</title>
     <link rel="stylesheet" type="text/css" href="css/common.css" />
-    <title>巡檢紀錄表 -- SafeTrack</title>
+    <link rel="stylesheet" type="text/css" href="css/member.css" />
+    
 </head>
 <body>
 
@@ -25,52 +26,55 @@
 
 <!-- ======================================================= -->
 
-<!-- 巡檢表單 -->
-<section class="inspection_board">
-    <h2>建立巡檢紀錄</h2>
+<!-- 會員資料 -->
+<div class="profile-page">
+    <h2>會員設定</h2>
 
-    <div class="note">
-        <div class="date_title">巡檢日期: </div>
-        <input type="date" id="date" class="date">
-
-        <div class="location_title">巡檢地點: </div> 
-        <input type="text" id="location" class="location">
-
-        <div class="item_title">巡檢項目: </div>
-        <select id="item" class="item">
-            <option value="">請選擇</option>
-            <option value="作業人員">作業人員</option>
-            <option value="機械設備">機械設備</option>
-            <option value="原物料">原物料</option>
-            <option value="環境">環境</option>
-            <option value="消防設備">消防設備</option>
-            <option value="其他">其他</option>
-        </select>
-        <!-- 當選擇"其他"才顯示輸入欄位 -->
-         <input type="text" id="other_item" class="other_item" placeholder="請填寫其他項目" style="display: none; margin-top: 5px;" />
-
-        <div class="is_abnormmal_title">是否異常?</div>
-        <label>
-            <input type="radio" name="abnormal" value="true" id="abnormal_yes">
-            是
-        </label>
-        <label>
-            <input type="radio" name="abnormal" value="false" id="abnormal_no" checked>
-            否
-        </label>
-
-        <div class="note_title">異常事項/內容描述: </div>
-        <textarea id="description" class="description"></textarea>
-
-        <div class="photo_title">現場照片: </div>
-        <input type="file" id="photo" accept="image/*" multiple>
-
-        <button onclick="createInspection()" class="submit">
-            送出
-        </button>
+    <div class="profile-card">
+        <h3>基本資料</h3>
+        <p>帳號: <span id="username"></span></p>
+        <p>職位: <span id="role"></span></p>
     </div>
-</section>
-<!-- ================================================== -->
+
+    <!-- 資料維護 -->
+     <div class="profile-card">
+        <h3>修改個人資料</h3>
+        <label>姓名</label>
+        <input type="text" id="name">
+
+        <label>Email</label>
+        <input type="email" id="email">
+
+        <label>部門</label>
+        <input type="text" id="department">
+
+        <button onclick="updateProfile()">儲存資料</button>
+     </div>
+
+     <div class="profile-card">
+        <h3>修改密碼</h3>
+        <label>舊密碼</label>
+        <input type="password" id="oldPassword">
+
+        <label>新密碼</label>
+        <input type="password" id="newPassword">
+
+        <label>確認新密碼</label>
+        <input type="password" id="confirmPassword">
+
+        <button onclick="changePassword()">修改密碼</button>
+     </div>
+
+     <!-- 主管專區 -->
+    <div class="profile-card" id="adminPanel" style="display: none;">
+        <h3>主管專區</h3>
+        <button onclick="location.href='member-management.html'">會員權限管理</button>
+    </div>
+</div>
+
+
+
+<!-- ======================================================= -->
 
 <!-- 漢堡選單設計 -->
 <div class="tag" id="tag" onclick="openSidebar()">
@@ -181,9 +185,10 @@
 
 <script src="js/config.js"></script>
 <script src="js/auth.js"></script>
-<script src="js/inspections.js"></script>
 <script src="js/ui.js"></script>
-
+<script src="js/inspections.js"></script>
+<script src="js/member-profile.js"></script>
+<!-- <script src="js/member-management.js"></script> -->
     
 </body>
 </html>

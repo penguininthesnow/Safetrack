@@ -83,7 +83,7 @@
                     </div>
                     <!-- 第二層 右側滑出 -->
                     <div class="submenu-right">
-                        <a href="#" onclick="goHistoryYear(event)">
+                        <a href="#" onclick="goHistoryPage(event)">
                             查詢歷年巡檢紀錄
                         </a>
                         <div class="submenu-right-year" id="yearList">
@@ -97,18 +97,23 @@
         
         <div class="warning">
             <img src="./images/warning_2.png" width="20" height="20">
-            <a href="#">異常紀錄</a>
+            <a href="inspection-history.html?abnormal=true">異常紀錄</a>
         </div>
         <div class="setting">
             <img src="./images/settings_2.png" width="20" height="20">
-            <a href="#">會員設定</a>
+            <a href="member-profile.html">會員設定</a>
+        </div>
+
+        <div class="notification-setting" id="notificationSettingMenu" style="display: none;">
+            <img src="#" width="20" height="20">
+            <a href="notification-settings.html">通知設定</a>
         </div>
 
         <div id="logoutArea" style="display:none;">
             <hr>
             <button class="logout-btn" onclick="logout()">
                 登出
-                 <img src="./images/sign out.png" width="20" height="20">
+                 <img src="./images/line.png" width="20" height="20">
             </button>
         </div>
     </div>

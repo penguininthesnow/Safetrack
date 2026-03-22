@@ -4,8 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.database import Base, engine
 from backend import models
-from backend.routers import users, inspections
-from backend.database import engine
+from backend.routers import users, inspections, notification_settings
 
 
 print(engine.url) #查找資料庫
@@ -37,6 +36,7 @@ Base.metadata.create_all(bind=engine)
 # routers
 app.include_router(users.router)
 app.include_router(inspections.router)
+app.include_router(notification_settings.router)
 
 
 # debug

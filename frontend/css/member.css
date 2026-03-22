@@ -1,0 +1,353 @@
+/* =========================
+   共用基礎設定
+========================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Microsoft JhengHei", Arial, sans-serif;
+    background-color: #f4f7fb;
+    color: #333;
+}
+
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+input,
+button,
+select {
+    font-family: inherit;
+}
+
+/* =========================
+   會員設定頁 member-profile
+========================= */
+.profile-page {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px 40px;
+}
+
+.profile-page h2 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #1f2d3d;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.profile-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e8edf3;
+}
+
+.profile-card h3 {
+    font-size: 20px;
+    color: #2c3e50;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eef2f6;
+}
+
+.profile-card p {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #4a5568;
+}
+
+.profile-card p span {
+    display: inline-block;
+    margin-left: 8px;
+    font-weight: 600;
+    color: #1a202c;
+}
+
+.profile-card label {
+    display: block;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.profile-card input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cfd8e3;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s ease;
+    background-color: #fff;
+}
+
+.profile-card input:focus {
+    border-color: #4c8bf5;
+    box-shadow: 0 0 0 3px rgba(76, 139, 245, 0.15);
+}
+
+.profile-card button {
+    margin-top: 20px;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    background-color: #2f80ed;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.profile-card button:hover {
+    background-color: #1f6fd6;
+    transform: translateY(-1px);
+}
+
+.profile-card button:active {
+    transform: translateY(0);
+}
+
+/* 主管專區按鈕可稍微區別 */
+#adminPanel button {
+    background-color: #27ae60;
+}
+
+#adminPanel button:hover {
+    background-color: #1f8e4d;
+}
+
+
+/* =========================
+   會員管理頁 member-management
+========================= */
+.member-management-page {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px 40px;
+}
+
+.member-management-page h2 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #1f2d3d;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.search-box {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 22px;
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e8edf3;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 12px 14px;
+    border: 1px solid #cfd8e3;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.search-box input:focus {
+    border-color: #4c8bf5;
+    box-shadow: 0 0 0 3px rgba(76, 139, 245, 0.15);
+}
+
+.search-box button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #2f80ed;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+    white-space: nowrap;
+}
+
+.search-box button:hover {
+    background-color: #1f6fd6;
+}
+
+/* 表格外框 */
+.member-management-page table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* 表頭 */
+.member-management-page thead {
+    background-color: #2f80ed;
+    color: #ffffff;
+}
+
+.member-management-page th {
+    padding: 16px 14px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* 表格內容 */
+.member-management-page td {
+    padding: 14px 12px;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid #edf2f7;
+    color: #374151;
+}
+
+.member-management-page tbody tr:hover {
+    background-color: #f8fbff;
+}
+
+/* 下拉選單 */
+.member-management-page select {
+    padding: 10px 12px;
+    border: 1px solid #cfd8e3;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #fff;
+    outline: none;
+    cursor: pointer;
+}
+
+.member-management-page select:focus {
+    border-color: #4c8bf5;
+    box-shadow: 0 0 0 3px rgba(76, 139, 245, 0.15);
+}
+
+/* 操作按鈕 */
+.member-management-page td button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #27ae60;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.member-management-page td button:hover {
+    background-color: #1f8e4d;
+}
+
+/* 最後一列不要底線 */
+.member-management-page tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================
+   角色顯示可視化（可選）
+========================= */
+.role-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.role-admin {
+    background-color: #ffe7c2;
+    color: #9a5b00;
+}
+
+.role-staff {
+    background-color: #dff3ff;
+    color: #1363a1;
+}
+
+
+/* =========================
+   RWD 響應式
+========================= */
+@media (max-width: 768px) {
+
+    .profile-page,
+    .member-management-page {
+        margin: 24px auto;
+        padding: 0 14px 30px;
+    }
+
+    .profile-page h2,
+    .member-management-page h2 {
+        font-size: 24px;
+    }
+
+    .profile-card {
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+    .search-box {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box button {
+        width: 100%;
+    }
+
+    .member-management-page table,
+    .member-management-page thead,
+    .member-management-page tbody,
+    .member-management-page th,
+    .member-management-page td,
+    .member-management-page tr {
+        display: block;
+        width: 100%;
+    }
+
+    .member-management-page thead {
+        display: none;
+    }
+
+    .member-management-page tbody tr {
+        background: #ffffff;
+        margin-bottom: 16px;
+        border-radius: 14px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+        border: 1px solid #e8edf3;
+    }
+
+    .member-management-page td {
+        text-align: left;
+        padding: 12px 14px;
+        border-bottom: 1px solid #edf2f7;
+        position: relative;
+    }
+
+    .member-management-page td:last-child {
+        border-bottom: none;
+    }
+}

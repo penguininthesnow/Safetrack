@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Form
-from typing import List
+from typing import List, Optional
 from sqlalchemy.orm import Session
 from sqlalchemy import func, and_ # 年度統計 #紀錄編號
 from backend.database import get_db
@@ -122,6 +122,7 @@ def get_years(db: Session = Depends(get_db)):
 
     return [y[0] for y in years]
 
+
 # 年度查詢
 @router.get("/year/{year}", response_model=list[schemas.InspectionOut])
 def get_by_year(
@@ -138,25 +139,45 @@ def get_year_stats(
     year: int,
     db: Session = Depends(get_db),
 ):
-    total_abnormal = db.query(
-        func.sum(models.Inspection.abnormal_count)
-    ).filter(
-        models.Inspection.year == year
-    ).scalar()
+    abnormal = db.query(models.Inspection).filter(
+        models.Inspection.year == year,
+        models.Inspection.is_abnormal == True
+    ).count()
+
+    normal = db.query(models.Inspection).filter(
+        models.Inspection.year == year,
+        models.Inspection.is_abnormal == False
+    ).count()
 
     return {
         "year": year,
-        "total_abnormal": total_abnormal or 0
+        "normal": normal,
+        "abnormal": abnormal
     }
 
 
-
 # 主畫面
+# 查詢歷史巡檢紀錄 (支援篩選)
 @router.get("/", response_model=list[schemas.InspectionOut])
-def get_all_inspections(
-    skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
+def get_inspections(
+    year: Optional[int] = None,
+    location: Optional[str] = None,
+    item: Optional[str] = None,
+    is_abnormal: Optional[bool] = None,
+    db: Session = Depends(get_db),
 ):
-    return db.query(models.Inspection).offset(skip).limit(limit).all()
+    query = db.query(models.Inspection)
+
+    if year:
+        query = query.filter(models.Inspection.year == year)
+    if location:
+        query = query.filter(models.Inspection.location.contains(location))
+    if item:
+        query = query.filter(models.Inspection.item.contains(item))
+    if is_abnormal is not None:
+        query = query.filter(models.Inspection.is_abnormal == is_abnormal)
+    return query.order_by(models.Inspection.date.desc()).all()
+
 
 # 會員頁面
 @router.get("/member", response_model=list[schemas.InspectionOut])
@@ -165,68 +186,6 @@ def get_my_inspections(
     current_user: models.User = Depends(get_current_user),
 ):
     return db.query(models.Inspection).filter(models.Inspection.created_by == current_user.id).all()
-
-
-# GET 異常通知頁面
-@router.get("/{inspection_id}", response_model=schemas.InspectionOut)
-def get_inspection(inspection_id: int, db: Session = Depends(get_db)):
-    inspection = db.query(models.Inspection).filter(models.Inspection.id == inspection_id).first()
-    if not inspection:
-        raise HTTPException(status_code=404, detail="Inspection not found")
-    return inspection
-
-# PUT
-@router.put("/{inspection_id}", response_model=schemas.InspectionOut)
-def update_inspection(
-    inspection_id: int,
-    update_data: schemas.InspectionUpdate,
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(get_current_user),
-):
-    inspection = db.query(models.Inspection).filter(models.Inspection.id == inspection_id).first()
-    if not inspection:
-        raise HTTPException(status_code=404, detail="Inspection not found")
-    if inspection.created_by !=current_user.id and current_user.role !="admin":
-        raise HTTPException(status_code=403, detail="Not allowed")
-    
-    for field, value in update_data.dict(exclude_unset=True).items():
-        setattr(inspection, field, value)
-
-    db.commit()
-    db.refresh(inspection)
-
-    # LINE_Notify 異常提醒(更新後若變成異常)
-    # Line Message API 設定
-    if inspection.is_abnormal == True:
-
-        message = f"""
-    Safetrack 巡檢異常!
-    巡檢編號: {inspection.inspection_number}
-    地點: {inspection.location}
-    項目: {inspection.item}
-    日期: {inspection.date}
-
-    請立即改善/處理~
-    """
-        send_line_message(message, inspection.image_url)
-
-
-
-@router.delete("/{inspection_id}")
-def delete_inspection(
-    inspection_id: int,
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(get_current_user),
-):
-    inspection = db.query(models.Inspection).filter(models.Inspection.id == inspection_id).first()
-    if not inspection:
-        raise HTTPException(status_code=404, detail="Inspection not found")
-    if inspection.created_by !=current_user.id and current_user.role !="admin":
-        raise HTTPException(status_code=403, detail="Not allowed")
-    
-    db.delete(inspection)
-    db.commit()
-    return {"detail": "Inspection deleted successfully"}
 
 
 # 巡檢紀錄查詢介面
@@ -246,8 +205,88 @@ def get_inspection_by_number(
         raise HTTPException(status_code=404, detail="Inspection not found!")
     return inspection
 
+
+# GET 異常通知頁面 + 修改資料頁面
+@router.get("/{inspection_id}", response_model=schemas.InspectionOut)
+def get_inspection_by_id(
+    inspection_id: int, 
+    db: Session = Depends(get_db),
+):
+    inspection = db.query(models.Inspection).filter(models.Inspection.id == inspection_id).first()
+    if not inspection:
+        raise HTTPException(status_code=404, detail="Inspection not found")
+    return inspection
+
+# PUT /api/inspections/{id}
+@router.put("/{inspection_id}", response_model=schemas.InspectionOut)
+def update_inspection(
+    inspection_id: int,
+    location: str = Form(...),
+    item: str = Form(...),
+    description: str = Form(...),
+    is_abnormal: bool = Form(...),
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    inspection = db.query(models.Inspection).filter(models.Inspection.id == inspection_id).first()
+    if not inspection:
+        raise HTTPException(status_code=404, detail="Inspection not found")
+    if inspection.created_by !=current_user.id and current_user.role !="admin":
+        raise HTTPException(status_code=403, detail="無權限修改此紀錄!")
+
+    inspection.location = location
+    inspection.item = item
+    inspection.description = description
+    inspection.is_abnormal = is_abnormal
+
+    db.commit()
+    db.refresh(inspection)
+
+    # LINE_Notify 異常提醒(更新後若變成異常)
+    # Line Message API 設定
+    # 先讀資料庫設定，再決定要不要送通知
+    if inspection.is_abnormal is True:
+        setting = db.query(models.NotificationSetting).first()
+
+        if setting and setting.is_enabled and setting.notify_abnormal and setting.line_group_id:
+            message = f"""
+    Safetrack 巡檢異常!
+    巡檢編號: {inspection.inspection_number}
+    地點: {inspection.location}
+    項目: {inspection.item}
+    日期: {inspection.date}
+
+    請立即改善/處理~
+    """
+            send_line_message(
+                message=message,
+                image_url=inspection.image_url,
+                to_id=setting.line_group_id
+            )
+
+    return inspection
+
+
+@router.delete("/{inspection_id}")
+def delete_inspection(
+    inspection_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    inspection = db.query(models.Inspection).filter(models.Inspection.id == inspection_id).first()
+    if not inspection:
+        raise HTTPException(status_code=404, detail="Inspection not found")
+    if inspection.created_by !=current_user.id and current_user.role !="admin":
+        raise HTTPException(status_code=403, detail="Not allowed")
+    
+    db.delete(inspection)
+    db.commit()
+    return {"detail": "Inspection deleted successfully"}
+
+
+
 # 測試用
-@router.get("/test")
-def test(db: Session = Depends(get_db)):
-    inspections = db.query(models.Inspection).all()
-    return inspections
+# @router.get("/test")
+# def test(db: Session = Depends(get_db)):
+#     inspections = db.query(models.Inspection).all()
+#     return inspections

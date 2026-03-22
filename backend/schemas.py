@@ -1,13 +1,14 @@
-from pydantic import BaseModel
-from datetime import date
+from pydantic import BaseModel, EmailStr
+from datetime import date, datetime
 from typing import Optional
 
 # User schema
 class UserCreate(BaseModel):
     username: str
-    email: str
+    email: EmailStr
     password: str
-    role: Optional[str] = "user"
+
+    # role: Optional[str] = "staff"
 
 class UserLogin(BaseModel):
     email: str
@@ -15,13 +16,54 @@ class UserLogin(BaseModel):
 
 class UserOut(BaseModel):
     id: int
-    username: str
-    email: str
+    username: Optional[str] = None
+    email: EmailStr
     role: str
+    name: Optional[str] = None
+    department: Optional[str] = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
 
     model_config = {
-        "from_attribute" : True 
-    }       
+        "from_attributes" : True 
+    }     
+# 修改資料
+class UserUpdate(BaseModel):
+    username: Optional[str] = None
+    email: Optional[EmailStr] = None
+    name: Optional[str] = None
+    department: Optional[str] = None
+
+# 修改密碼
+class ChangePassword(BaseModel):
+    old_password: str
+    new_password: str
+
+# 職位修改
+class UpdateRole(BaseModel):
+    role: str
+
+# LINE主管通知
+class NotificationSettingUpdate(BaseModel):
+    line_group_name: str
+    line_group_id: str
+    notify_abnormal: bool
+    is_enabled: bool
+
+# 回傳資料
+class NotificationSettingOut(BaseModel):
+    id: int
+    line_group_name: Optional[str] = None
+    line_group_id: Optional[str] = None
+    notify_abnormal: bool
+    is_enabled: bool
+    updated_by: Optional[int] = None
+    updated_at: Optional[datetime] = None
+
+    model_config = {
+        "from_attributes": True
+    }
+
 
 # Inspections schema
 class InspectionBase(BaseModel):
@@ -33,7 +75,7 @@ class InspectionBase(BaseModel):
     inspection_number: str
     image_url: Optional[str] = None
 
-class InspectionCreate(BaseModel):
+class InspectionCreate(InspectionBase):
     pass
 
 class InspectionUpdate(BaseModel):
@@ -48,5 +90,9 @@ class InspectionOut(InspectionBase):
     created_by: int
     inspection_number: str
 
-    class Config:
-        orm_mode = True
+    model_config = {
+        "from_attributes" : True 
+    } 
+
+    # class Config:
+    #     orm_mode = True

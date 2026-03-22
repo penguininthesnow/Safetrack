@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>編輯巡檢紀錄 -- SafeTrack</title>
     <link rel="stylesheet" type="text/css" href="css/inspection.css" />
     <link rel="stylesheet" type="text/css" href="css/common.css" />
-    <title>巡檢紀錄表 -- SafeTrack</title>
+    <link rel="stylesheet" type="text/css" href="css/history.css" />
+    <link rel="stylesheet" type="text/css" href="css/edit.css" />
+    
 </head>
 <body>
 
@@ -23,17 +26,14 @@
     </div>
 </section>
 
-<!-- ======================================================= -->
+<!-- =================================================== -->
 
-<!-- 巡檢表單 -->
+<!-- 把原本的資料帶進表單，修改API -->
 <section class="inspection_board">
-    <h2>建立巡檢紀錄</h2>
+    <h2>修改巡檢紀錄</h2>
 
     <div class="note">
-        <div class="date_title">巡檢日期: </div>
-        <input type="date" id="date" class="date">
-
-        <div class="location_title">巡檢地點: </div> 
+        <div class="location_title">巡檢地點:</div>
         <input type="text" id="location" class="location">
 
         <div class="item_title">巡檢項目: </div>
@@ -55,29 +55,31 @@
             是
         </label>
         <label>
-            <input type="radio" name="abnormal" value="false" id="abnormal_no" checked>
+            <input type="radio" name="abnormal" value="false" id="abnormal_no">
             否
         </label>
 
-        <div class="note_title">異常事項/內容描述: </div>
+        <div class="note_title">異常事項/內容描述:</div>
         <textarea id="description" class="description"></textarea>
 
-        <div class="photo_title">現場照片: </div>
-        <input type="file" id="photo" accept="image/*" multiple>
-
-        <button onclick="createInspection()" class="submit">
-            送出
-        </button>
+        <div class="button-group">
+            <button type="button" onclick="updateInspection()" class="submit primary">
+                儲存修改
+            </button>
+            <button type="button" onclick="history.back()" class="submit secondary">取消返回</button>
+        </div>
     </div>
 </section>
-<!-- ================================================== -->
 
-<!-- 漢堡選單設計 -->
+
+
+<!-- =================================================== -->
+ <!-- 漢堡選單設計 -->
 <div class="tag" id="tag" onclick="openSidebar()">
     <img src="images/menu.png" width="30px" height="30px" />
 </div>
 <!-- 漢堡選單內容設計 -->
-  <!-- Sidebar 背景遮罩 -->
+ <!-- Sidebar 背景遮罩 -->
 <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
 
 <!-- Sidebar 主體 -->
@@ -181,9 +183,10 @@
 
 <script src="js/config.js"></script>
 <script src="js/auth.js"></script>
-<script src="js/inspections.js"></script>
 <script src="js/ui.js"></script>
+<script src="js/inspection-edit.js"></script>
 
+<script src="js/dashboard.js"></script>
     
 </body>
 </html>

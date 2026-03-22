@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/inspection.css" />
+    <title>通知設定 -- SafeTrack</title>
     <link rel="stylesheet" type="text/css" href="css/common.css" />
-    <title>巡檢紀錄表 -- SafeTrack</title>
+    <link rel="stylesheet" type="text/css" href="css/setting.css" />
+
 </head>
 <body>
 
@@ -25,52 +26,36 @@
 
 <!-- ======================================================= -->
 
-<!-- 巡檢表單 -->
-<section class="inspection_board">
-    <h2>建立巡檢紀錄</h2>
+<div class="notification-page">
+    <h2>通知設定</h2>
 
-    <div class="note">
-        <div class="date_title">巡檢日期: </div>
-        <input type="date" id="date" class="date">
+    <div class="notification-card">
+        <h3>LINE 群組通知設定</h3>
 
-        <div class="location_title">巡檢地點: </div> 
-        <input type="text" id="location" class="location">
-
-        <div class="item_title">巡檢項目: </div>
-        <select id="item" class="item">
-            <option value="">請選擇</option>
-            <option value="作業人員">作業人員</option>
-            <option value="機械設備">機械設備</option>
-            <option value="原物料">原物料</option>
-            <option value="環境">環境</option>
-            <option value="消防設備">消防設備</option>
-            <option value="其他">其他</option>
+        <label>是否啟用通知</label>
+        <select id="isEnabled">
+            <option value="true">啟用</option>
+            <option value="false">停用</option>
         </select>
-        <!-- 當選擇"其他"才顯示輸入欄位 -->
-         <input type="text" id="other_item" class="other_item" placeholder="請填寫其他項目" style="display: none; margin-top: 5px;" />
 
-        <div class="is_abnormmal_title">是否異常?</div>
-        <label>
-            <input type="radio" name="abnormal" value="true" id="abnormal_yes">
-            是
-        </label>
-        <label>
-            <input type="radio" name="abnormal" value="false" id="abnormal_no" checked>
-            否
-        </label>
+        <label>LINE 群組名稱</label>
+        <input type="text" id="lineGroupName" placeholder="如: 工安巡檢通知" />
 
-        <div class="note_title">異常事項/內容描述: </div>
-        <textarea id="description" class="description"></textarea>
+        <label>LINE 群組 ID</label>
+        <input type="text" id="lineGroupId" placeholder="請輸入群組 ID" />
 
-        <div class="photo_title">現場照片: </div>
-        <input type="file" id="photo" accept="image/*" multiple>
+        <label>異常巡檢通知</label>
+        <select id="notifyAbnormal">
+            <option value="true">通知</option>
+            <option value="false">不通知</option>
+        </select>
 
-        <button onclick="createInspection()" class="submit">
-            送出
-        </button>
+        <button onclick="saveNotificationSettings()">儲存設定</button>
     </div>
-</section>
-<!-- ================================================== -->
+</div>
+
+
+<!-- ======================================================= -->
 
 <!-- 漢堡選單設計 -->
 <div class="tag" id="tag" onclick="openSidebar()">
@@ -83,7 +68,8 @@
 <!-- Sidebar 主體 -->
 <div id="sidebar" class="sidebar">
     <div class="sidebar-content">
-        <h3><img src="./images/menu.png" width="30" height="30">功能選單
+        <h3>
+            <img src="./images/menu.png" width="30" height="30">功能選單
         </h3>
 
         <div class="home">
@@ -133,8 +119,8 @@
         </div>
 
         <div class="notification-setting" id="notificationSettingMenu" style="display: none;">
-            <img src="./images/line.png" width="20" height="20">
-            <a href="notification-settings.html">通知設定</a>
+            <img src="./images/line.png" width="25" height="25">
+            <span onclick="location.href='notification-settings.html'">通知設定</span>
         </div>
 
         <div id="logoutArea" style="display:none;">
@@ -181,9 +167,8 @@
 
 <script src="js/config.js"></script>
 <script src="js/auth.js"></script>
-<script src="js/inspections.js"></script>
 <script src="js/ui.js"></script>
-
+<script src="js/notification-settings.js"></script>
     
 </body>
 </html>

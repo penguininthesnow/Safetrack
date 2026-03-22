@@ -1,0 +1,110 @@
+/* card */
+.inspection_board {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 30px 40px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* 標題 */
+.inspection_board h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* 表單區塊 */
+.note {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* label 標題 */
+.note div {
+    font-weight: 600;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* input / select / textarea */
+.location,
+.item,
+.other_item,
+.description {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+/* focus 效果 */
+.location:focus,
+.item:focus,
+.other_item:focus,
+.description:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.15);
+}
+
+/* textarea 高度 */
+.description {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* radio 區塊 */
+label {
+    margin-right: 15px;
+    font-size: 14px;
+}
+
+/* ===== 按鈕區塊 ===== */
+.button-group {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+    width: 200px;
+}
+
+.button-group button {
+    flex: 1;
+    padding: 7px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* 主按鈕 */
+.primary {
+    background: #4CAF50;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+}
+
+.primary:hover {
+    background: #43a047;
+}
+
+/* 次按鈕 */
+.secondary {
+    background: #e0e0e0;
+    color: #333;
+
+    display: flex;
+    justify-content: center;
+}
+
+.secondary:hover {
+    background: #d5d5d5;
+}

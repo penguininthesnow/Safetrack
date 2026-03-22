@@ -1,5 +1,3 @@
-// tab切換、sidebar互動
-
 
 // sidebar互動
 function openSidebar() {
@@ -16,6 +14,35 @@ function closeSidebar() {
 
     // 關閉選單時，顯示漢堡
     document.querySelector(".tag").style.display = "block";
+}
+
+// 通知設定用
+async function loadCurrentUserForSidebar() {
+    const token = localStorage.getItem("token");
+
+    console.log("sidebar token:", token);
+
+    if (!token) return;
+
+    const response = await fetch(`${API_BASE}/users/member`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    console.log("sidebar response_status:", response.status);
+
+    if (!response.ok) return;
+
+    const user = await response.json();
+    console.log("sidebar user:", user);
+
+    const notificationMenu = document.getElementById("notificationSettingMenu");
+    console.log("notificationMenu:", notificationMenu);
+
+    if (user.role === "admin" && notificationMenu) {
+        notificationMenu.style.display = "block";
+    }
 }
 
 // 巡檢系統
@@ -59,37 +86,34 @@ function goHistoryPage(event) {
     }
     window.location.href = "inspection-history.html";
 }
-// 年份查詢
-function goHistoryYear(event) {
-    event.preventDefault();
-    event.stopPropagation();
 
-    const token = localStorage.getItem("token");
 
-    if (!token) {
-        closeSidebar();
-        openModal();
-        return;
-    }
+// sidebar 專用資料
+async function loadSidebarYears() {
+    try {
+        const response = await fetch(`${API_BASE}/inspections/years`);
+        const years = await response.json();
 
-    window.location.href = "inspection-history-year.html";
-}
+        const container = document.getElementById("yearList");
+        container.innerHTML = "";
 
-// 年份動態顯示
-function generateYearList() {
-    const yearList = document.getElementById("yearList")
-    if (!yearList) return
+        years.forEach(year => {
+            const link = document.createElement("a");
 
-    const currentYear = new Date().getFullYear()
-    for (let y = currentYear; y >= 2020; y--) {
-        const a = document.createElement("a")
+            link.href = `inspection-history.html?year=${year}`;
+            link.textContent = `${year} 年`;
 
-        a.href = `inspection-history-year.html?year=${y}`
-
-        a.textContent = y + " 年"
-
-        yearList.appendChild(a)
+            container.appendChild(link);
+        });
+    } catch (err) {
+        console.error("載入年份失敗", err);
     }
 }
 
-generateYearList()
+document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("yearList");
+    if (container) {
+        loadSidebarYears();
+    }
+    loadCurrentUserForSidebar();
+});

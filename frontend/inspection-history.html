@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/inspection.css" />
     <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/history.css" />
     <title>查詢歷史巡檢紀錄 -- SafeTrack</title>
 </head>
 <body>
@@ -24,16 +25,57 @@
 </section>
 
 <!-- =================================================== -->
+<!-- 年份選單 + 篩選區塊 -->
+<section class="inspection-filters">
+    <label for="yearSelect"> 年份: </label>
+    <select id="yearSelect"></select>
 
+    <label for="locationFilter"> 地點: </label>
+    <input type="text" id="locationFilter" placeholder="輸入地點" />
+
+    <label for="itemFilter">巡檢項目:</label>
+    <input type="text" id="itemFilter" placeholder="輸入巡檢項目" />
+
+    <label for="abnormalFilter">異常:</label>
+    <select id="abnormalFilter">
+        <option value="">全部</option>
+        <option value="true">異常</option>
+        <option value="false">正常</option>
+    </select>
+
+    <button id="searchBtn">搜尋</button>
+    <button id="downloadCsvBtn">下載 csv.</button>
+</section>
 
 <!-- 分頁設計 -->
 <div class="tabs">
-    <button onclick="showTab('records')">當年巡檢紀錄</button>
-    <button onclick="showTab('stats')">異常統計圖表</button>
+    <button class="tab active" data-tab="records" onclick="showTab('records')">當年巡檢紀錄</button>
+    <button class="tab" data-tab="stats" onclick="showTab('stats')">異常統計圖表</button>
 </div>
 
-<div id="records"></div>
-<div id="stats" style="display:none;"></div>
+<div id="records" class="tab-pannel">
+    <table id="inspectionTable">
+        <thead>
+            <tr>
+                <th>巡檢編號</th>
+                <th>日期</th>
+                <th>地點</th>
+                <th>項目</th>
+                <th>異常</th>
+                <th>說明</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<div id="stats" class="tab-pannel" style="display:none;">
+    <button id="chartTypeBtn">切換圖表類型</button>
+    
+    <div class="chart-container">
+        <canvas id="inspectionChart"></canvas>
+    </div>
+</div>
 
 <!-- ================================================= -->
 
@@ -77,7 +119,7 @@
                     </div>
                     <!-- 第二層 右側滑出 -->
                     <div class="submenu-right">
-                        <a href="#" onclick="goHistoryYear(event)">
+                        <a href="#" onclick="goHistoryPage(event)">
                             查詢歷年巡檢紀錄
                         </a>
                         <div class="submenu-right-year" id="yearList">
@@ -91,11 +133,16 @@
         
         <div class="warning">
             <img src="./images/warning_2.png" width="20" height="20">
-            <a href="#">異常紀錄</a>
+            <a href="inspection-history.html?abnormal=true">異常紀錄</a>
         </div>
         <div class="setting">
             <img src="./images/settings_2.png" width="20" height="20">
-            <a href="#">會員設定</a>
+            <a href="member-profile.html">會員設定</a>
+        </div>
+
+        <div class="notification-setting" id="notificationSettingMenu" style="display: none;">
+            <img src="./images/line.png" width="20" height="20">
+            <a href="notification-settings.html">通知設定</a>
         </div>
 
         <div id="logoutArea" style="display:none;">

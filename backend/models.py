@@ -9,11 +9,29 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String(100))
     email = Column(String(255), unique=True)
-    password = Column(String(255))
-    role = Column(String(50), default="user")
+    password_hash = Column(String(255))
+    role = Column(String(50), default="staff")
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
+    name = Column(String(100))
+    department = Column(String(100))
+
 
     inspections = relationship("Inspection", back_populates="owner")
+
+# LINE 主管通知    
+class NotificationSetting(Base):
+    __tablename__ = "notification_settings"
+
+    id = Column(Integer, primary_key=True)
+    line_group_name = Column(String(100))
+    line_group_id = Column(String(255))
+    notify_abnormal = Column(Boolean, default=True)
+    is_enabled = Column(Boolean, default= True)
+    updated_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
+    updated_by = Column(Integer, ForeignKey("users.id"))
+
+
 
 class Inspection(Base):
     __tablename__ = "inspections"

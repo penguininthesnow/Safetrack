@@ -1,4 +1,15 @@
 // 巡檢統計, 儀表板功能
+function gotoInspection() {
+    const token = localStorage.getItem("token")
+
+    if (!token) {
+        openModal();
+        return;
+    }
+
+    // 已登入 => 導向巡檢頁
+    window.location.href = "inspection.html"
+}
 
 
 // 異常分析圖表

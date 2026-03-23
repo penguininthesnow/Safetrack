@@ -61,18 +61,20 @@ async def create_inspection(
         inspection_number = f"{date_str}{status_code}{sequence}"
 
     image_urls = []
+    image_url_string = None
 
     # 存照片並上傳到s3
     for file in files:
-        if file:
+        if file and file.filename:
             try:
                 image_url = upload_to_s3(file)
                 image_urls.append(image_url)
             except Exception as e:
                 print("S3 上傳失敗", e)
 
-            # 將多張照片時存成字串
-            image_url_string = ",".join(image_urls)
+    # 將多張照片時存成字串
+    if image_urls:
+        image_url_string = ",".join(image_urls)
 
     new_inspection = models.Inspection(
         year = year,
@@ -94,7 +96,19 @@ async def create_inspection(
         
     # LINE Notify 異常提醒
     if new_inspection.is_abnormal:
-        inspection_url = f"https://penguinthesnow.com/inspection-history?number={new_inspection.inspection_number}"
+        setting = db.query(models.NotificationSetting).first()
+
+        print("new_inspection.is_abnormal =", new_inspection.is_abnormal)
+        print("setting =", setting)
+
+        if setting:
+            print("setting.is_enabled =", setting.is_enabled)
+            print("setting.notify_abnormal =", setting.notify_abnormal)
+            print("setting.line_group_id =", setting.line_group_id)
+
+        if setting and setting.is_enabled and setting.notify_abnormal and setting.line_group_id:
+            inspection_url = f"https://penguinthesnow.com/inspection-detail.html?number={new_inspection.inspection_number}"
+
         # inspection_url = f"http://127.0.0.1:8000/static/inspection-history?number={new_inspection.inspection_number}"
 
         message = f"""
@@ -108,7 +122,14 @@ async def create_inspection(
         查看完整記錄:
         {inspection_url}
         """
-        send_line_message(message, new_inspection.image_url)
+        result = send_line_message(
+            message=message,
+                image_url=new_inspection.image_url,
+                to_id=setting.line_group_id
+        )
+        print("LINE send result = ", result)
+    else:
+        print("未發送 LINE：通知設定未開啟、未勾選異常通知，或 line_group_id 為空")
 
     return new_inspection
 
@@ -247,6 +268,9 @@ def update_inspection(
     # 先讀資料庫設定，再決定要不要送通知
     if inspection.is_abnormal is True:
         setting = db.query(models.NotificationSetting).first()
+
+        print("inspection.is_abnormal =", inspection.is_abnormal)
+        print("setting =", setting)
 
         if setting and setting.is_enabled and setting.notify_abnormal and setting.line_group_id:
             message = f"""

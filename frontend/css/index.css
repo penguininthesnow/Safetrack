@@ -47,12 +47,9 @@ body {
 
 /* ===== welcome 區 ===== */
 .welcome_board {
-    width: 80%;
+    /* width: 80%; */
     margin: 60px auto;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; */
+
 }
 
 .line0 {
@@ -84,10 +81,93 @@ h2 {
     text-align: center;
 }
 
+/* ===== welcome 區 + 輪播區 ===== */
+.carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto 30px;
+    border-radius: 20px;
+}
+
+/* 滑動軌道 */
+.carousel-track {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+}
+
+/* 每一頁 */
+.carousel-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 360px;
+    padding: 40px 20px 60px;
+    background: linear-gradient(to right, #f7fbff, #eef6ff);
+}
+
+.welcome_board,
+.feature_board {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+}
+
+/* 第二頁功能介紹 */
+.feature_board {
+    text-align: center;
+}
+
+.feature_board h2 {
+    font-size: 32px;
+    margin-bottom: 24px;
+}
+
+.feature_board ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.feature_board li {
+    font-size: 20px;
+    margin: 14px 0;
+}
+
+
+/* 圓點 */
+.carousel-dots {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #c8d2dc;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background-color: #2c3e50;
+    transform: scale(1.15);
+}
+
 .hr {
     width: 60%;
     margin: 40px auto;
 }
+
 
 
 /* ===== 巡檢卡片 ===== */
@@ -239,6 +319,47 @@ footer {
 .footer_text {
     display: flex;
     justify-content: center;
+}
+
+/* =================公佈欄==================== */
+.osha-board {
+    margin: 30px auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 900px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.osha-board h2 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.osha-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.osha-items li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.osha-items li a {
+    text-decoration: none;
+    color: #1a73e8;
+}
+
+.osha-items li a:hover {
+    text-decoration: underline;
+}
+
+.osha-more {
+    margin-top: 15px;
+    text-align: right;
 }
 
 /* 手機版 */

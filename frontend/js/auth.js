@@ -192,6 +192,37 @@ function toggleMode() {
     }
 }
 
+// function updateUserUI() {
+//     const email = localStorage.getItem("email");
+//     const username = localStorage.getItem("username");
+//     const userArea = document.getElementById("userArea");
+//     const switchText = document.getElementById("switchText");
+//     const switchLink = document.querySelector(".modal a");
+//     const token = localStorage.getItem("token");
+
+//     if (username) {
+//         userArea.innerText = username + "，您好";
+
+//         // modal 下方改成登出
+//         switchText.innerText = "";
+//         switchLink.innerText = "登出";
+//         switchLink.onclick = logout;
+//     } else {
+//         userArea.innerHTML =
+//             '<img src="images/signup.png" width="30" height="30">';
+//         switchText.innerText = "還沒有帳號?";
+//         switchLink.innerText = "點此註冊";
+//         switchLink.onclick = toggleMode;
+//     }
+//     // sidebar:讓登入時，顯示登出
+//     if (token) {
+//         document.getElementById("logoutArea").style.display = "block";
+//     } else {
+//         document.getElementById("logoutArea").style.display = "none";
+//     }
+// }
+
+
 function updateUserUI() {
     const email = localStorage.getItem("email");
     const username = localStorage.getItem("username");
@@ -199,26 +230,39 @@ function updateUserUI() {
     const switchText = document.getElementById("switchText");
     const switchLink = document.querySelector(".modal a");
     const token = localStorage.getItem("token");
+    const logoutArea = document.getElementById("logoutArea");
 
     if (username) {
-        userArea.innerText = username + "，您好";
+        if (userArea) {
+            userArea.innerText = username + "，您好";
+        }
 
-        // modal 下方改成登出
-        switchText.innerText = "";
-        switchLink.innerText = "登出";
-        switchLink.onclick = logout;
+        if (switchText) {
+            switchText.innerText = "";
+        }
+
+        if (switchLink) {
+            switchLink.innerText = "登出";
+            switchLink.onclick = logout;
+        }
     } else {
-        userArea.innerHTML =
-            '<img src="images/signup.png" width="30" height="30">';
-        switchText.innerText = "還沒有帳號?";
-        switchLink.innerText = "點此註冊";
-        switchLink.onclick = toggleMode;
+        if (userArea) {
+            userArea.innerHTML =
+                '<img src="images/sign_1.png" width="30" height="30">';
+        }
+
+        if (switchText) {
+            switchText.innerText = "還沒有帳號?";
+        }
+
+        if (switchLink) {
+            switchLink.innerText = "點此註冊";
+            switchLink.onclick = toggleMode;
+        }
     }
-    // sidebar:讓登入時，顯示登出
-    if (token) {
-        document.getElementById("logoutArea").style.display = "block";
-    } else {
-        document.getElementById("logoutArea").style.display = "none";
+
+    if (logoutArea) {
+        logoutArea.style.display = token ? "block" : "none";
     }
 }
 

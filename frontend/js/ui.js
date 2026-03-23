@@ -14,6 +14,10 @@ function closeSidebar() {
 
     // 關閉選單時，顯示漢堡
     document.querySelector(".tag").style.display = "block";
+
+    const sidebar = document.getElementById("sidebar");
+    if (!sidebar) return;
+    sidebar.style.display = "none";
 }
 
 // 通知設定用

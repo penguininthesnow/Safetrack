@@ -33,17 +33,49 @@
 
 <!-- Sidebar 主體 -->
 
+<div class="carousel">
 
-<div class="welcome_board">
-    <div class="line0">歡迎使用</div>
-    <div class="line1">SafeTrack -- 工安巡檢與異常通知系統</div>
-    <div class="line2">一起讓巡檢變得輕鬆吧!</div>
+    <div class="carousel-track" id="carouselTrack">
+
+        <!-- 第一頁 -->
+        <div class="carousel-slide">
+            <div class="welcome_board">
+                <div class="line0">歡迎使用</div>
+                <div class="line1">SafeTrack -- 工安巡檢與異常通知系統</div>
+                <div class="line2">一起讓巡檢變得輕鬆吧!</div>
+            </div>
+        </div>
+        <!-- 第二頁 -->
+        <div class="carousel-slide">
+            <div class="feature_board">
+                <h2>系統功能</h2>
+                <ul>
+                    <li>✔ 巡檢紀錄建立</li>
+                    <li>✔ 異常即時通知 (LINE)</li>
+                    <li>✔ 圖片上傳與紀錄查詢</li>
+                    <li>✔ 權限管理 (主管 / 現場人員)</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 圓點 -->
+    <div class="carousel-dots" id="carouselDots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+    </div>
+
 </div>
+
 
 <hr />
 
 
-<section></section>
+<section class="osha-board">
+    <h2>職安公佈欄</h2>
+    <div id="osha-list">載入中... ...</div>
+</section>
 
 </div>   
 
@@ -84,6 +116,7 @@
 <script src="js/auth.js"></script>
 <script src="js/inspections.js"></script>
 <script src="js/ui.js"></script>
+<script src="js/index.js"></script>
 
 
 </body>

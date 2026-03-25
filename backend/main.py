@@ -4,7 +4,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.database import Base, engine
 from backend import models
-from backend.routers import users, inspections, notification_settings, osha
+# from backend.routers import users, inspections, notification_settings, osha
+from backend.routers.users import router as users_router
+from backend.routers.inspections import router as inspections_router
+from backend.routers.notification_settings import router as notification_settings_router
+from backend.routers.osha import router as osha_router
 
 
 print(engine.url) #查找資料庫
@@ -34,10 +38,14 @@ app.add_middleware(
 Base.metadata.create_all(bind=engine)
 
 # routers
-app.include_router(users.router)
-app.include_router(inspections.router)
-app.include_router(notification_settings.router)
-app.include_router(osha.router)
+app.include_router(users_router)
+app.include_router(inspections_router)
+app.include_router(notification_settings_router)
+app.include_router(osha_router)
+
+print("=== ROUTES ===")
+for route in app.routes:
+    print(route.path)
 
 
 # debug

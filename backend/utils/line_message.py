@@ -2,7 +2,8 @@ import requests
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../../.env"))
 
 CHANNEL_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
 # GROUP_ID = os.getenv("LINE_GROUP_ID")
@@ -48,19 +49,33 @@ def send_line_message(message: str, image_url=None, to_id: str = None):
         "messages": messages
     }
 
-    response = requests.post(url, headers=headers, json=data)
-
-    print("Send to: ", to_id)
-    print("LINE API response:", response.status_code)
-    print("LINE API body:", response.text)
-
-    if response.status_code != 200:
-        print("LINE Notify 發送失敗:", response.text)
-
     try:
-        return response.json()
-    except:
-        return {"status_code": response.status_code, "text": response.text}
+        response = requests.post(
+            url,
+            headers=headers,
+            json=data,
+            timeout=(3, 5)
+        )
+
+        print("Send to: ", to_id)
+        print("LINE API response:", response.status_code)
+        print("LINE API body:", response.text)
+
+        if response.status_code != 200:
+            print("LINE Notify 發送失敗:", response.text)
+
+        try:
+            return response.json()
+        except:
+            return {"status_code": response.status_code, "text": response.text}
+        
+    except requests.exceptions.Timeout:
+        print("LINE API timeout")
+        return {"error": "timeout"}
+
+    except Exception as e:
+        print("LINE 發送錯誤:", str(e))
+        return {"error": str(e)}
     
 
      # 選傳送其中一個的寫法

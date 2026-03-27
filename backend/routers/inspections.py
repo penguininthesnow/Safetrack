@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Form
+from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Form, BackgroundTasks
 from typing import List, Optional
 from sqlalchemy.orm import Session
 from sqlalchemy import func, and_ # 年度統計 #紀錄編號
@@ -8,11 +8,8 @@ from backend import models, schemas
 from backend.auth import get_current_user
 from backend.services.s3 import upload_to_s3
 from backend.utils.line_message import send_line_message
-from datetime import date, datetime #紀錄編號
-import shutil
-import os
+from datetime import date #紀錄編號
 import time
-import uuid
 
 
 
@@ -21,6 +18,7 @@ router = APIRouter(prefix="/api/inspections", tags=["inspections"])
 # 建立巡檢紀錄 #加入紀錄編號
 @router.post("/", response_model=schemas.InspectionOut)
 async def create_inspection(
+    background_tasks: BackgroundTasks,
     date_value: date = Form(...),
     location: str = Form(...),
     item: str = Form(...),
@@ -31,6 +29,10 @@ async def create_inspection(
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
+    start_total = time.time()
+
+    # 1. 生成年份與巡檢編號
+    t1 = time.time()
     # 自動抓年份、動態生成
     year = date_value.year
 
@@ -60,6 +62,12 @@ async def create_inspection(
         sequence = str(count_today + 1).zfill(4)
         inspection_number = f"{date_str}{status_code}{sequence}"
 
+    print("編號產生耗時:", time.time() - t1)
+
+
+    # 2. 上傳 s3
+    t2 = time.time()
+
     image_urls = []
     image_url_string = None
 
@@ -72,9 +80,16 @@ async def create_inspection(
             except Exception as e:
                 print("S3 上傳失敗", e)
 
-    # 將多張照片時存成字串
-    if image_urls:
-        image_url_string = ",".join(image_urls)
+    image_url_string = ",".join(image_urls) if image_urls else None
+    print("s3 上傳耗時:", time.time() - t2)
+
+
+    # # 將多張照片時存成字串
+    # if image_urls:
+    #     image_url_string = ",".join(image_urls)
+
+    # 3. 寫入 DB
+    t3 = time.time()
 
     new_inspection = models.Inspection(
         year = year,
@@ -92,7 +107,11 @@ async def create_inspection(
     db.add(new_inspection)
     db.commit()
     db.refresh(new_inspection)
-        
+
+    print("DB commit 耗時:", time.time() - t3)
+
+    # 4. 背景送 LINE
+    t4 = time.time()  
         
     # LINE Notify 異常提醒
     if new_inspection.is_abnormal:
@@ -122,16 +141,21 @@ async def create_inspection(
             查看完整記錄:
             {inspection_url}
             """
-            result = send_line_message(
+
+            background_tasks.add_task(
+                send_line_message,
                 message=message,
-                    image_url=new_inspection.image_url,
-                    to_id=setting.line_group_id
+                image_url=new_inspection.image_url,
+                to_id=setting.line_group_id
             )
-            print("LINE send result = ", result)
+            print("LINE 背景任務已加入")
         else:
             print("未發送 LINE：通知設定未開啟、未勾選異常通知，或 line_group_id 為空")
     else:
         print("此筆為正常紀錄，不發送 LINE")
+    
+    print("加入背景任務耗時:", time.time() - t4)
+    print("API 總耗時:", time.time() - start_total)
 
     return new_inspection
 

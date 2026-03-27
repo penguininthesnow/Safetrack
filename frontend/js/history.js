@@ -214,15 +214,35 @@ function renderChart(data) {
 function downloadCsv() {
     const rows = [["巡檢編號", "日期", "地點", "項目", "異常", "說明"]];
     document.querySelectorAll("#inspectionTable tbody tr").forEach(tr => {
-        const cols = Array.from(tr.children).map(td => td.textContent);
+        const cols = Array.from(tr.children)
+            .map(td => td.textContent)
+            .slice(0, -1) // 排除功能操作那一欄
         rows.push(cols);
     });
-    const csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
-    const encodeUri = encodeURI(csvContent);
+    const csvContent = rows.map(row => row.join(",")).join("\n");
+
+    // 加入 BOM 避免亂碼
+    const blob = new Blob(["\uFEFF" + csvContent], {
+        type: "text/csv;charset=utf-8;"
+    });
+
+    const url = URL.createObjectURL(blob);
+
     const link = document.createElement("a");
-    link.setAttribute("href", encodeUri);
-    link.setAttribute("download", "inspection_records.csv");
+    link.href = url;
+    link.download = "inspection_record.csv";
+
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+
+    // const encodeUri = encodeURI(csvContent);
+    // const link = document.createElement("a");
+    // link.setAttribute("href", encodeUri);
+    // link.setAttribute("download", "inspection_records.csv");
+    // document.body.appendChild(link);
+    // link.click();
+    // document.body.removeChild(link);
 }

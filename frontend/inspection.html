@@ -36,8 +36,9 @@
         <div class="location_title">巡檢地點: </div> 
         <input type="text" id="location" class="location">
 
+    <div class="item_group">
         <div class="item_title">巡檢項目: </div>
-        <select id="item" class="item">
+        <select id="item" class="item" name="item">
             <option value="">請選擇</option>
             <option value="作業人員">作業人員</option>
             <option value="機械設備">機械設備</option>
@@ -46,10 +47,12 @@
             <option value="消防設備">消防設備</option>
             <option value="其他">其他</option>
         </select>
-        <!-- 當選擇"其他"才顯示輸入欄位 -->
-         <input type="text" id="other_item" class="other_item" placeholder="請填寫其他項目" style="display: none; margin-top: 5px;" />
 
-        <div class="is_abnormmal_title">是否異常?</div>
+        <!-- 當選擇"其他"才顯示輸入欄位 -->
+        <input type="text" id="other_item" class="other_item" name="other_item" placeholder="請填寫其他項目" autocomplete="off" style="display: none; margin-top: 8px;" />
+    </div>
+
+        <div class="is_abnormal_title">是否異常?</div>
         <label>
             <input type="radio" name="abnormal" value="true" id="abnormal_yes">
             是
@@ -62,9 +65,16 @@
         <div class="note_title">異常事項/內容描述: </div>
         <textarea id="description" class="description"></textarea>
 
-        <div class="photo_title">現場照片: </div>
-        <input type="file" id="photo" accept="image/*" multiple>
-
+        <div class="photo_group">
+            <div class="photo_title">現場照片: </div>
+            <input type="file" id="photo" accept="image/*" multiple>
+            
+            <!-- 顯示多張檔名 -->
+            <ul id="file-name-list">
+                <li>尚未選擇檔案</li>
+            </ul>
+        </div>
+        
         <button onclick="createInspection()" class="submit">
             送出
         </button>

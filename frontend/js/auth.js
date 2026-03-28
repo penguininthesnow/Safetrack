@@ -222,7 +222,7 @@ function updateUserUI() {
     } else {
         if (userArea) {
             userArea.innerHTML =
-                '<img src="images/user.png" width="30" height="30">';
+                '<img src="images/user_2.png" width="30" height="30">';
         }
 
         if (switchText) {

@@ -212,7 +212,7 @@ h2 {
     flex-shrink: 0;
     white-space: normal;
     word-break: break-word;
-    box-sizing: border-boxs;
+    box-sizing: border-box;
 }
 
 .guide-step.active {
@@ -537,6 +537,19 @@ footer {
 
 /* 手機版 */
 @media (max-width:360px) {
+
+    /* ==================防止爆版設定=============== */
+    html,
+    body {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* ==================防止爆版設定=============== */
     .top {
         padding: 10px;
     }
@@ -580,6 +593,84 @@ footer {
 
     .sidebar-content a {
         font-size: 14px;
+    }
+
+    /*================= 影片導覽區塊====================== */
+    .guide-board {
+        width: calc(100% - 20px);
+        margin: 24px auto;
+        padding: 16px 12px;
+        border-radius: 14px;
+    }
+
+    .guide-board h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .guide-steps {
+        gap: 8px;
+        padding: 8px 6px 12px;
+        margin-bottom: 20px;
+    }
+
+    .guide-step {
+        min-width: 100px;
+        padding: 8px 6px;
+        border-radius: 12px;
+    }
+
+    .step-number {
+        font-size: 13px;
+        margin-bottom: 4px;
+    }
+
+    .step-label {
+        font-size: 11px;
+        line-height: 1.35;
+    }
+
+    .step-line {
+        width: 28px;
+        height: 4px;
+    }
+
+    .guide-content {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .guide-text,
+    .guide-video {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .guide-text {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    .guide-text h3 {
+        font-size: 17px;
+        margin-bottom: 10px;
+    }
+
+    .guide-text p {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .guide-video {
+        padding: 10px;
+        border-radius: 12px;
+    }
+
+    .guide-video video {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 10px;
+        object-fit: contain;
     }
 
     footer {

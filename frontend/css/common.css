@@ -394,9 +394,18 @@ footer {
 
 /* 手機版 */
 @media (max-width:360px) {
-    /* .top {
-        padding: 10px;
-    } */
+
+    html,
+    body {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+
+    img,
+    video {
+        max-width: 100%;
+        height: auto;
+    }
 
     .left {
         font-size: 30px;
@@ -410,11 +419,6 @@ footer {
     .right_sign {
         font-size: 15px;
     }
-
-    /* .tag {
-        top: 65px;
-        left: 5px;
-    } */
 
     .welcome_board {
         margin-top: 50px;
@@ -441,6 +445,40 @@ footer {
 
     .sidebar-content a {
         font-size: 14px;
+    }
+
+    .submenu-right {
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+        width: 100%;
+        min-width: 0;
+        box-shadow: none;
+        border-left: 2px solid #e5e7eb;
+        margin-top: 8px;
+        margin-left: 12px;
+        padding-left: 10px;
+        background: transparent;
+    }
+
+    .submenu-item.has-submenu-right {
+        display: block;
+    }
+
+    .submenu-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .submenu-right a,
+    .submenu-right-year a {
+        display: block;
+        padding: 8px 0;
+        font-size: 13px;
+        white-space: normal;
+        word-break: break-word;
     }
 
     footer {
@@ -590,18 +628,6 @@ footer {
         text-decoration: underline;
     }
 
-    /* .guest-only {
-        display: none;
-    }
-
-    .login-only {
-        display: none;
-    } */
-
-
-
-
-
 
     .mobile-topbar,
     .mobile-topbar * {
@@ -617,6 +643,5 @@ footer {
     .mobile-right {
         outline: none;
     }
-
 
 }

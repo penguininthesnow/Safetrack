@@ -643,7 +643,7 @@ footer {
     .guide-text,
     .guide-video {
         min-width: 0;
-        width: 100%;
+        width: 80%;
     }
 
     .guide-text {
@@ -667,7 +667,7 @@ footer {
     }
 
     .guide-video video {
-        width: 100%;
+        width: 90%;
         aspect-ratio: 16 / 9;
         border-radius: 10px;
         object-fit: contain;

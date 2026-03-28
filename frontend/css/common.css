@@ -486,11 +486,12 @@ footer {
         justify-content: space-between;
         padding: 0 12px;
         box-sizing: border-box;
-        background: #2d4056;
+        background: 1e2a38;
         border-bottom: 1px solid #e5e5e5;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         z-index: 1001;
 
+        position: relative;
         -webkit-tap-highlight-color: transparent;
     }
 
@@ -499,6 +500,12 @@ footer {
     .mobile-right {
         display: flex;
         align-items: center;
+    }
+
+    .mobile-center {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .mobile-left {
@@ -516,9 +523,9 @@ footer {
     }
 
     .topbar-brand {
-        font-size: 45px;
+        font-size: 40px;
         font-weight: 700;
-        color: #333;
+        color: white;
     }
 
     .topbar-btn {

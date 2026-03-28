@@ -491,7 +491,6 @@ footer {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         z-index: 1001;
 
-        /* position: relative; */
         -webkit-tap-highlight-color: transparent;
     }
 
@@ -510,14 +509,6 @@ footer {
         align-items: center;
     }
 
-    /* .mobile-left {
-        min-width: 60px;
-    }
-
-    .mobile-right {
-        min-width: 72px;
-        justify-content: flex-end;
-    } */
     .mobile-left,
     .mobile-right {
         display: flex;
@@ -532,19 +523,30 @@ footer {
 
     .topbar-btn {
         border: none;
-        background: transparent;
+        background: rgba(255, 255, 255, 0.12);
+
         padding: 0;
-        width: 36px;
-        height: 36px;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
 
-        box-shadow:
-            3px 3px 12px rgba(0, 0, 0, 0.2),
-            inset 0 0 15px rgba(255, 255, 255, 0.7);
-        background-color: #888;
+        backdrop-filter: blur(6px);
+        /* 🔥質感關鍵 */
+        transition: all 0.2s ease;
+    }
+
+    .topbar-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .topbar-btn:active {
+        transform: scale(0.92);
+        background: rgba(255, 255, 255, 0.25);
     }
 
     .mobile-icons {

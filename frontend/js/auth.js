@@ -1,9 +1,6 @@
 
 let token = null;
 
-// const API_BASE = "http://127.0.0.1:8000";  // 開發用
-// const API_BASE = "https://penguinthesnow.com";  // 正式用
-
 async function submitAuth() {
     const email = document.getElementById("modalEmail").value.trim();
     const password = document.getElementById("modalPassword").value.trim();
@@ -195,12 +192,20 @@ function toggleMode() {
 function updateUserUI() {
     const email = localStorage.getItem("email");
     const username = localStorage.getItem("username");
+    const token = localStorage.getItem("token");
+
     const userArea = document.getElementById("userArea");
     const switchText = document.getElementById("switchText");
     const switchLink = document.querySelector(".modal a");
-    const token = localStorage.getItem("token");
     const logoutArea = document.getElementById("logoutArea");
 
+    // 手機版 topbar / sidebar 相關元素
+    const guestOnlyEls = document.querySelectorAll(".guest-only");
+    const loginOnlyEls = document.querySelectorAll(".login-only");
+    const sidebarUserBox = document.getElementById("sidebarUserBox");
+    const sidebarGreeting = document.getElementById("sidebarGreeting");
+
+    // ===== 桌機版 top 區塊 =====
     if (username) {
         if (userArea) {
             userArea.innerText = username + "，您好";
@@ -217,7 +222,7 @@ function updateUserUI() {
     } else {
         if (userArea) {
             userArea.innerHTML =
-                '<img src="images/sign_1.png" width="30" height="30">';
+                '<img src="images/user.png" width="30" height="30">';
         }
 
         if (switchText) {
@@ -230,17 +235,55 @@ function updateUserUI() {
         }
     }
 
+    // ===== sidebar 底部登出區 =====
     if (logoutArea) {
         logoutArea.style.display = token ? "block" : "none";
+    }
+
+    // ===== 手機版 topbar 切換 =====
+    if (token && username) {
+        guestOnlyEls.forEach(el => {
+            el.style.display = "none";
+        });
+
+        loginOnlyEls.forEach(el => {
+            el.style.display = "";
+        });
+
+        if (sidebarUserBox) {
+            sidebarUserBox.style.display = "block";
+        }
+
+        if (sidebarGreeting) {
+            sidebarGreeting.innerText = `${username}，您好`;
+        }
+    } else {
+        guestOnlyEls.forEach(el => {
+            el.style.display = "";
+        });
+
+        loginOnlyEls.forEach(el => {
+            el.style.display = "none";
+        });
+
+        if (sidebarUserBox) {
+            sidebarUserBox.style.display = "none";
+        }
+
+        if (sidebarGreeting) {
+            sidebarGreeting.innerText = "";
+        }
     }
 }
 
 // 刷新頁面
 window.onload = async function () {
     const token = localStorage.getItem("token");
+
     if (token && !localStorage.getItem("username")) {
         await fetchUserInfo();
     }
+
     updateUserUI();
 };
 
@@ -251,6 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "index.html";
     }
 });
+
 
 function homepage() {
     window.location.href = "index.html";

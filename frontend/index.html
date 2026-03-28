@@ -23,6 +23,45 @@
     </div>
 </section>
 
+<!-- 手機版頂部導覽列 -->
+<div class="mobile-topbar" id="mobileTopbar">
+
+    <!-- 未登入: 左邊品牌 -->
+    <div class="mobile-left guest-only" onclick="homepage()">
+        <span class="topbar-brand">Safetrack</span>
+    </div>
+
+    <!-- 已登入：左邊漢堡 -->
+    <button class="topbar-btn login-only" onclick="openSidebar()">
+        <img src="./images/menu.png" alt="menu" width="22" height="22">
+    </button>
+
+    <!-- 中間標題（登入時顯示） -->
+    <div class="mobile-center login-only">
+        <span class="topbar-brand">Safetrack</span>
+    </div>
+
+    <!-- 右側功能 -->
+    <div class="mobile-right">
+        <!-- 未登入 -->
+        <div class="guest-only mobile-icons">
+            <div class="topbar-icon" onclick="openModal()">
+                <img src="./images/user.png" alt="登入/註冊" width="34" height="34">
+            </div>
+            <div class="topbar-icon" onclick="gotoInspection()">
+                <img src="./images/note_2.png" alt="填寫巡檢紀錄" width="28" height="28">
+            </div>
+        </div>
+
+        <!-- 已登入 -->
+        <div class="login-only mobile-icons">
+            <div class="topbar-icon" onclick="gotoInspection()">
+                <img src="./images/note_2.png" alt="填寫巡檢紀錄" width="28" height="28">
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- 漢堡選單設計 -->
 <div class="tag" id="tag" onclick="openSidebar()" style="display: none;">
     <img src="./images/menu.png" width="30px" height="30px" />
@@ -36,6 +75,11 @@
     <div class="sidebar-content">
         <h3><img src="./images/menu.png" width="30" height="30">功能選單
         </h3>
+
+        <div class="sidebar-user-box login-only" id="sidebarUserBox" style="display:none;">
+            <div class="sidebar-user-greet" id="sidebarGreeting">您好</div>
+            <!-- <a href="member-profile.html" class="sidebar-user-link">會員資料</a> -->
+        </div>
 
         <div class="home">
             <img src="./images/home_2.png" width="20px" height="20px" />

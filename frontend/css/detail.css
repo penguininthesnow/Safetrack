@@ -89,10 +89,36 @@ body {
     user-select: none;
 }
 
-.back {
+.router {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.router a {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #4d91e9;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.router a:hover {
+    background-color: #3666a5;
+}
+
+/* .back {
     display: inline-block;
     margin-top: 20px;
 }
+
+.index {
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 15px;
+} */
 
 /* 平板版 */
 @media (max-width:1200px) {

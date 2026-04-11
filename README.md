@@ -3,7 +3,8 @@
 
 ## 📌 專案簡介
 Safetrack 是一套專為工地 / 工廠安全管理設計的巡檢系統，解決傳統紙本巡檢「難統整、延遲通知」的問題。
-[!image](https://github.com/penguininthesnow/Safetrack/blob/main/index.png)
+![image](https://github.com/penguininthesnow/Safetrack/blob/main/index.png)
+![image](index.png)
 透過系統化流程：
   📱 線上填報巡檢
   🚨 異常即時 LINE 通知

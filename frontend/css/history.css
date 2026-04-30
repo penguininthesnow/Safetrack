@@ -130,10 +130,15 @@ body {
 }
 
 /* ===== 表格 ===== */
+.table-wrapper {
+    overflow-x: auto;
+}
+
 #inspectionTable {
     width: 100%;
     border-collapse: collapse;
-    min-width: 900px;
+    border-spacing: 0;
+    table-layout: fixed;
 }
 
 #inspectionTable thead {

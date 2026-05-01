@@ -18,17 +18,16 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           debug: true
           script: |
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm use --lts
-
             cd /home/ubuntu/Safetrack
             git fetch --all
             git reset --hard origin/main
 
-            cd backend
+            # 啟用 Python venv
+            source venv/bin/activate
 
-            npm install
+            # 安裝套件（如果有 requirements.txt）
+            pip install -r requirements.txt || true
 
-            pm2 delete app || true
-            pm2 start app.js --name app
+            # 重啟服務
+            pkill -f uvicorn || true
+            nohup uvicorn main:app --host 0.0.0.0 --port 8000 &

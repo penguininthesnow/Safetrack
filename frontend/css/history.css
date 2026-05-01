@@ -35,8 +35,16 @@ body {
 /* ===== 篩選區塊 ===== */
 .filter-group {
     display: flex;
+    align-items: center;
+    gap: 6px;
     flex: 1;
-    min-width: 120px;
+    min-width: 180px;
+}
+
+.filter-group label {
+    width: 70px;
+    flex-shrink: 0;
+    text-align: right;
 }
 
 .inspection-filters {
@@ -56,11 +64,13 @@ body {
 
 .inspection-filters label {
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .inspection-filters input,
 .inspection-filters select {
-    width: 100%;
+    flex: 1;
+    width: auto;
     padding: 8px 10px;
     border-radius: 6px;
     border: 1px solid #ccc;

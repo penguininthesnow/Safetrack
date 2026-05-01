@@ -30,4 +30,6 @@ jobs:
 
             # 重啟服務
             pkill -f uvicorn || true
-            nohup uvicorn main:app --host 0.0.0.0 --port 8000 &
+            nohup uvicorn main:app --host 0.0.0.0 --port 8000 > output.log 2>&1 &
+            disown
+            # 讓 process 脫離 SSH session

@@ -35,8 +35,8 @@ body {
 /* ===== 篩選區塊 ===== */
 .filter-group {
     display: flex;
-    flex-direction: column;
-    min-width: 150px;
+    flex: 1;
+    min-width: 160px;
 }
 
 .inspection-filters {

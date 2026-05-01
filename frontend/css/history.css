@@ -168,8 +168,7 @@ body {
 /* 說明欄位可讀性 */
 #inspectionTable th:nth-child(6),
 #inspectionTable td:nth-child(6) {
-    text-align: left;
-    vertical-align: middle;
+    text-align: center;
     min-width: 220px;
     line-height: 1.5;
 }

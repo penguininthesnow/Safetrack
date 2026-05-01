@@ -20,8 +20,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const chartBtn = document.getElementById('chartTypeBtn');
     if (chartBtn) {
         chartBtn.addEventListener('click', () => {
-            chartType = chartType === 'bar' ? 'pie' : 'bar';
-            loadInspections(); // 重新 render chart
+            chartType = chartType === 'pie' ? 'bar' : 'pie';
+
+            renderChart(currentData);
+
+            chartBtn.innerText =
+                chartType === 'pie' ? '切換長條圖' : '切換圓餅圖';
         });
     }
 
@@ -76,6 +80,12 @@ function showTab(tabName) {
     document.getElementById("records").style.display = "none";
     document.getElementById("stats").style.display = "none";
     document.getElementById(tabName).style.display = "block";
+
+
+    if (tabName === "stats") {
+        chartType = "pie";
+        renderChart(currentData);
+    }
 }
 
 // 根據年份、地點、項目、異常篩選查詢
@@ -109,7 +119,10 @@ async function loadInspections() {
     const response = await fetch(url);
     const data = await response.json();
 
+    currentData = data;
+
     renderTable(data);
+
 
     const activeTab = document.querySelector(".tab.active").dataset.tab;
     if (activeTab === "stats") {
@@ -184,7 +197,8 @@ async function deleteInspection(id) {
 }
 
 // 異常統計圖表
-let chartType = 'bar'; // 初始長條圖
+let chartType = 'pie'; // 初始圓餅圖
+let currentData = [];
 
 function renderChart(data) {
     const ctx = document.getElementById('inspectionChart').getContext('2d');

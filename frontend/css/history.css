@@ -169,6 +169,7 @@ body {
 #inspectionTable th:nth-child(6),
 #inspectionTable td:nth-child(6) {
     text-align: left;
+    vertical-align: middle;
     min-width: 220px;
     line-height: 1.5;
 }

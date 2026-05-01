@@ -37,14 +37,14 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
-    flex: 1;
-    min-width: 180px;
+    /* flex: 1; */
+    min-width: 240px;
 }
 
 .filter-group label {
     width: 70px;
     flex-shrink: 0;
-    text-align: center;
+    text-align: right;
 }
 
 .inspection-filters {

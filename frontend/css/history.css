@@ -139,7 +139,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
-    /* table-layout: fixed; */
+    table-layout: auto;
 }
 
 #inspectionTable thead {
@@ -166,6 +166,7 @@ body {
 }
 
 /* 說明欄位可讀性 */
+#inspectionTable th:nth-child(6),
 #inspectionTable td:nth-child(6) {
     text-align: left;
     min-width: 220px;

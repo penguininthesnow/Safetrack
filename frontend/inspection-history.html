@@ -66,14 +66,27 @@
 <!-- =================================================== -->
 <!-- 年份選單 + 篩選區塊 -->
 <section class="inspection-filters">
+    <!-- 年份:動態生成下拉式選單 -->
     <label for="yearSelect"> 年份: </label>
     <select id="yearSelect"></select>
 
+    <!-- 地點:動態生成下拉式選單 -->
     <label for="locationFilter"> 地點: </label>
-    <input type="text" id="locationFilter" placeholder="輸入地點" />
+    <select id="locationFilter">
+        <option value="">全部地點</option>
+    </select>
 
+    <!-- 巡檢項目:下拉式選單 -->
     <label for="itemFilter">巡檢項目:</label>
-    <input type="text" id="itemFilter" placeholder="輸入巡檢項目" />
+    <select id="itemFilter">
+        <option value="">全部</option>
+        <option value="作業人員">作業人員</option>
+        <option value="機械設備">機械設備</option>
+        <option value="原物料">原物料</option>
+        <option value="環境">環境</option>
+        <option value="消防設備">消防設備</option>
+        <option value="其他">其他</option>
+    </select>
 
     <label for="abnormalFilter">異常:</label>
     <select id="abnormalFilter">

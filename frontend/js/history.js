@@ -122,12 +122,30 @@ async function loadInspections() {
     currentData = data;
 
     renderTable(data);
+    populateLocationOptions(data);
 
 
     const activeTab = document.querySelector(".tab.active").dataset.tab;
     if (activeTab === "stats") {
         renderChart(data);
     }
+}
+
+// 巡檢地點 : 渲染動態生成下拉式選單
+function populateLocationOptions(data) {
+    const select = document.getElementById("locationFilter");
+
+    const locations = [...new Set(data.map(i => i.location))];
+
+    // 清空（保留第一個）
+    select.innerHTML = '<option value="">全部地點</option>';
+
+    locations.forEach(loc => {
+        const option = document.createElement("option");
+        option.value = loc;
+        option.textContent = loc;
+        select.appendChild(option);
+    });
 }
 
 // 動態生成表格

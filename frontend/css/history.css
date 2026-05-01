@@ -135,10 +135,11 @@ body {
 }
 
 #inspectionTable {
+    min-width: 1000px;
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
-    table-layout: fixed;
+    /* table-layout: fixed; */
 }
 
 #inspectionTable thead {
@@ -282,7 +283,7 @@ td:nth-child(5) {
     transform: scale(0.96);
 }
 
-/* ===== 響應式 ===== */
+/* ===== RWD ===== */
 @media (max-width: 768px) {
 
     .inspection-filters {

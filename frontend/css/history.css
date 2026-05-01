@@ -37,8 +37,8 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
-    flex: 1 1 0;
-    min-width: 0;
+    flex: 1 1 160px;
+    min-width: 140px;
 }
 
 .filter-group label {
@@ -50,17 +50,26 @@ body {
 
 .inspection-filters {
     background: white;
-    margin: 20px auto;
-    padding: 20px;
-    width: 90%;
+    margin: 20px 15px;
+    padding: 15px;
+
+
     max-width: 1100px;
+    box-sizing: border-box;
+
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
+
     align-items: center;
+    justify-content: space-between;
+}
+
+.inspection-filters * {
+    min-width: 0;
 }
 
 .inspection-filters label {
@@ -104,6 +113,12 @@ body {
 
 #downloadCsvBtn:hover {
     background-color: #1976d2;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 10px;
+    flex: 1 1 auto;
 }
 
 /* ===== Tabs ===== */
@@ -304,19 +319,38 @@ td:nth-child(5) {
 }
 
 /* ===== RWD ===== */
+@media (min-width: 1100px) {
+    .inspection-filters {
+        margin: 20px auto;
+    }
+}
+
 @media (max-width: 768px) {
+    .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+        flex: 1 1 100%;
+    }
+
+    .filter-group label {
+        text-align: left;
+        margin-bottom: 4px;
+    }
 
     .inspection-filters {
-        flex-direction: column;
-        align-items: flex-start;
+        gap: 12px;
+        padding: 15px;
     }
 
     .tabs {
-        flex-direction: column;
+        flex-direction: row;
     }
 
     .tabs button {
         border-radius: 8px;
+        flex: 1;
+        font-size: 15px;
+        padding: 8px;
     }
 
     #inspectionTable th,
@@ -327,6 +361,41 @@ td:nth-child(5) {
 
     #chartTypeBtn {
         width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .inspection-filters {
+        justify-content: flex-start;
+    }
+
+    .filter-group {
+        flex: 1 1 calc(50% - 15px);
+    }
+
+    .filter-group label {
+        text-align: left;
+        width: auto;
+    }
+
+}
+
+@media (max-width: 360px) {
+
+    .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+        flex: 1 1 100%;
+    }
+
+    .filter-group label {
+        text-align: left;
+        margin-bottom: 4px;
+    }
+
+    .inspection-filters {
+        gap: 12px;
     }
 
 }

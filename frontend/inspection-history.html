@@ -67,33 +67,42 @@
 <!-- 年份選單 + 篩選區塊 -->
 <section class="inspection-filters">
     <!-- 年份:動態生成下拉式選單 -->
-    <label for="yearSelect"> 年份: </label>
-    <select id="yearSelect"></select>
+    <div class="filter-group">
+        <label for="yearSelect"> 年份: </label>
+        <select id="yearSelect"></select>
+    </div>
 
     <!-- 地點:動態生成下拉式選單 -->
-    <label for="locationFilter"> 地點: </label>
-    <select id="locationFilter">
-        <option value="">全部地點</option>
-    </select>
+    <div class="filter-group">
+        <label for="locationFilter"> 地點: </label>
+        <select id="locationFilter">
+            <option value="">全部地點</option>
+        </select>
+    </div>
 
     <!-- 巡檢項目:下拉式選單 -->
-    <label for="itemFilter">巡檢項目:</label>
-    <select id="itemFilter">
-        <option value="">全部</option>
-        <option value="作業人員">作業人員</option>
-        <option value="機械設備">機械設備</option>
-        <option value="原物料">原物料</option>
-        <option value="環境">環境</option>
-        <option value="消防設備">消防設備</option>
-        <option value="其他">其他</option>
-    </select>
+    <div class="filter-group">
+        <label for="itemFilter">巡檢項目:</label>
+        <select id="itemFilter">
+            <option value="">全部</option>
+            <option value="作業人員">作業人員</option>
+            <option value="機械設備">機械設備</option>
+            <option value="原物料">原物料</option>
+            <option value="環境">環境</option>
+            <option value="消防設備">消防設備</option>
+            <option value="其他">其他</option>
+        </select>
+    </div>
 
-    <label for="abnormalFilter">異常:</label>
-    <select id="abnormalFilter">
-        <option value="">全部</option>
-        <option value="true">異常</option>
-        <option value="false">正常</option>
-    </select>
+    <div class="filter-group">
+        <label for="abnormalFilter">異常:</label>
+        <select id="abnormalFilter">
+            <option value="">全部</option>
+            <option value="true">異常</option>
+            <option value="false">正常</option>
+        </select>
+    </div>
+
 
     <button id="searchBtn">搜尋</button>
     <button id="downloadCsvBtn">下載 csv.</button>

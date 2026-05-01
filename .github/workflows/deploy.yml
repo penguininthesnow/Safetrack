@@ -23,6 +23,12 @@ jobs:
             nvm use --lts
 
             cd /home/ubuntu/Safetrack
-            git pull origin main
+            git fetch --all
+            git reset --hard origin/main
+
+            cd backend
+
             npm install
-            pm2 restart app
+
+            pm2 delete app || true
+            pm2 start app.js --name app

@@ -37,14 +37,15 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
-    /* flex: 1; */
-    min-width: 200px;
+    flex: 1 1 0;
+    min-width: 0;
 }
 
 .filter-group label {
     width: 70px;
     flex-shrink: 0;
     text-align: right;
+    white-space: nowrap;
 }
 
 .inspection-filters {
@@ -70,6 +71,7 @@ body {
 .inspection-filters input,
 .inspection-filters select {
     flex: 1;
+    min-width: 0;
     width: auto;
     padding: 8px 10px;
     border-radius: 6px;

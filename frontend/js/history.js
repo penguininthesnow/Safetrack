@@ -222,8 +222,8 @@ function renderChart(data) {
     const ctx = document.getElementById('inspectionChart').getContext('2d');
     const abnormalCount = data.filter(i => i.is_abnormal).length;
     const normalCount = data.length - abnormalCount;
-
-    if (window.inspectionChart) {
+    // 防呆
+    if (window.inspectionChart && typeof window.inspectionChart.destroy === "function") {
         window.inspectionChart.destroy();
     }
 
@@ -259,7 +259,7 @@ function renderChart(data) {
         };
     }
 
-    window.inspectionChart = new chartData(ctx, {
+    window.inspectionChart = new Chart(ctx, {
         type: chartType,
         data: chartData,
         options: {
@@ -271,7 +271,6 @@ function renderChart(data) {
         }
     });
 }
-
 
 
 // 下載 CSV

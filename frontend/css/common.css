@@ -284,13 +284,13 @@ body {
 
 .form-row {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    gap: 4px;
     margin: 10px 0;
 }
 
 .form-row label {
-    width: 90px;
+    width: auto;
 }
 
 .modal {
@@ -299,7 +299,9 @@ body {
     left: 50%;
     transform: translateX(-50%);
     background: white;
-    width: 350px;
+    width: 410px;
+    max-width: 90%;
+    /*  for 手機 */
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);

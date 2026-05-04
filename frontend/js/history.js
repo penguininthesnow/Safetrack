@@ -227,29 +227,14 @@ function renderChart(data) {
         window.inspectionChart.destroy();
     }
 
-    let chartData;
+    const chartData = {
+        labels: ['正常', '異常'],
+        datasets: [{
+            data: [normalCount, abnormalCount],
+            backgroundColor: ['#4CAF50', '#F44336']
+        }]
+    };
 
-    // 圓餅圖: 單一dataset
-    if (chartType === 'pie') {
-        chartData = {
-            labels: ['正常', '異常'],
-            datasets: [{
-                data: [normalCount, abnormalCount],
-                backgroundColor: ['#4CAF50', '#F44336']
-            }]
-        };
-    }
-
-    // 長條圖: 雙dataset
-    else {
-        chartData = {
-            labels: ['正常', '異常'],
-            datasets: [{
-                data: [normalCount, abnormalCount],
-                backgroundColor: ['#4CAF50', '#F44336']
-            }]
-        };
-    }
 
     window.inspectionChart = new Chart(ctx, {
         type: chartType,
@@ -257,9 +242,10 @@ function renderChart(data) {
         options: {
             plugins: {
                 legend: {
-                    display: true
+                    display: chartType === 'pie'
                 }
-            }
+            },
+            responsive: true
         }
     });
 }

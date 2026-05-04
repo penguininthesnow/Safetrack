@@ -269,6 +269,36 @@ td:nth-child(5) {
 }
 
 /* ===== 圖表區 ===== */
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.color-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.green {
+    background: #4CAF50;
+}
+
+.red {
+    background: #F44336;
+}
+
+/* =========== 手動做legend ============== */
+
 #stats {
     text-align: center;
 }

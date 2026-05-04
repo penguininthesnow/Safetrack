@@ -223,13 +223,26 @@ function renderChart(data) {
     const abnormalCount = data.filter(i => i.is_abnormal).length;
     const normalCount = data.length - abnormalCount;
 
-    if (window.inspectionChart && typeof window.inspectionChart.destroy === "function") {
+    if (window.inspectionChart) {
         window.inspectionChart.destroy();
     }
 
-    window.inspectionChart = new Chart(ctx, {
-        type: chartType, // 'bar' or 'pie'
-        data: {
+    let chartData;
+
+    // 圓餅圖: 單一dataset
+    if (chartType === 'pie') {
+        chartData = {
+            labels: ['正常', '異常'],
+            datasets: [{
+                data: [normalCount, abnormalCount],
+                backgroundColor: ['#4CAF50', '#F44336']
+            }]
+        };
+    }
+
+    // 長條圖: 雙dataset
+    else {
+        chartData = {
             labels: ['正常', '異常'],
             datasets: [
                 {
@@ -243,6 +256,18 @@ function renderChart(data) {
                     backgroundColor: '#F44336'
                 }
             ]
+        };
+    }
+
+    window.inspectionChart = new chartData(ctx, {
+        type: chartType,
+        data: chartData,
+        options: {
+            plugins: {
+                legend: {
+                    display: true
+                }
+            }
         }
     });
 }

@@ -222,6 +222,14 @@ function renderChart(data) {
     const ctx = document.getElementById('inspectionChart').getContext('2d');
     const abnormalCount = data.filter(i => i.is_abnormal).length;
     const normalCount = data.length - abnormalCount;
+    const customLegend = document.getElementById("customLegend");
+
+    if (chartType === 'pie') {
+        customLegend.style.display = "none";
+    } else {
+        customLegend.style.display = "flex";
+    }
+
     // 防呆
     if (window.inspectionChart && typeof window.inspectionChart.destroy === "function") {
         window.inspectionChart.destroy();

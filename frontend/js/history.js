@@ -231,11 +231,18 @@ function renderChart(data) {
         type: chartType, // 'bar' or 'pie'
         data: {
             labels: ['正常', '異常'],
-            datasets: [{
-                label: '巡檢紀錄統計',
-                data: [normalCount, abnormalCount],
-                backgroundColor: ['#4CAF50', '#F44336']
-            }]
+            datasets: [
+                {
+                    label: '正常',
+                    data: [normalCount, null],
+                    backgroundColor: ['#4CAF50']
+                },
+                {
+                    label: '異常',
+                    data: [null, abnormalCount],
+                    backgroundColor: '#F44336'
+                }
+            ]
         }
     });
 }

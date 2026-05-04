@@ -156,7 +156,7 @@ function openModal() {
         document.getElementById("usernameField").style.display = "none";
 
         document.querySelector(".modal button").style.display = "none";
-        // document.querySelector(".close-btn").style.display = "none";
+        document.querySelector(".close-btn").style.display = "block";
 
         document.getElementById("switchText").innerText = "";
         const link = document.querySelector(".modal a");

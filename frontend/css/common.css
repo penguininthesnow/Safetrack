@@ -276,6 +276,10 @@ body {
     cursor: pointer;
     color: #1e2a38;
 
+    padding: 0;
+    /* 防止被覆蓋 */
+    margin: 0;
+
 }
 
 .form-row {
@@ -310,7 +314,7 @@ body {
     text-align: center;
 }
 
-.modal button {
+.modal button:not(.close-btn) {
     margin-top: 15px;
     padding: 8px;
     border: none;

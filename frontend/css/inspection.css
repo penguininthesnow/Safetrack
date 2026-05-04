@@ -40,6 +40,10 @@
     margin-top: 20px;
 }
 
+.date {
+    margin-top: 10px;
+}
+
 .description {
     height: 80px;
     resize: none;
@@ -127,11 +131,6 @@
     .note input,
     .note textarea {
         font-size: 15px;
-    }
-
-    .submit {
-        /* width: 200px; */
-        align-self: center;
     }
 
 }

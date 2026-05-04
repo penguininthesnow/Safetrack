@@ -160,14 +160,14 @@
 
     .action-buttons {
         flex-direction: column;
-        align-items: stretch;
+        align-items: flex-end;
+        gap: 10px;
     }
 
     .submit,
     .index-btn {
         /* width: 200px; */
-        display: flex;
-        align-content: flex-end;
+        display: inline-block;
         text-align: center;
     }
 

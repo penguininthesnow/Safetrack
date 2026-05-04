@@ -133,7 +133,7 @@ function resetModal() {
     document.getElementById("usernameField").style.display = "none";
 
     document.querySelector(".modal button").style.display = "block";
-    // document.querySelector("close-btn").style.display = "block";
+    document.querySelector("close-btn").style.display = "block";
 
     document.getElementById("switchText").innerText = "還沒有帳號?";
     document.querySelector(".modal a").innerText = "點此註冊";

@@ -166,7 +166,8 @@
     .submit,
     .index-btn {
         /* width: 200px; */
-        align-self: center;
+        display: flex;
+        align-content: flex-end;
         text-align: center;
     }
 

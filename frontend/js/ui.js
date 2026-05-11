@@ -148,8 +148,9 @@ function goHistoryPage(event) {
 // sidebar 專用資料
 async function loadSidebarYears() {
     try {
-        const response = await fetch(`${API_BASE}/inspections/years`);
-        const years = await response.json();
+        const years = await getYears();
+        // const response = await fetch(`${API_BASE}/inspections/years`);
+        // const years = await response.json();
 
         const container = document.getElementById("yearList");
         container.innerHTML = "";

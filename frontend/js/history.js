@@ -40,8 +40,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // 動態載入年份清單
 async function loadYears() {
-    const response = await fetch(`${API_BASE}/inspections/years`);
-    const years = await response.json();
+    const years = await getYears();
+    // const response = await fetch(`${API_BASE}/inspections/years`);
+    // const years = await response.json();
 
     const select = document.getElementById("yearSelect");
     select.innerHTML = "";

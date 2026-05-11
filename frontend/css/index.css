@@ -137,6 +137,55 @@ h2 {
     margin: 14px 0;
 }
 
+/* 第三頁QR CODE */
+.qrcode-board {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    text-align: center;
+}
+
+.qrcode-board h2 {
+    font-size: 32px;
+    margin-bottom: 16px;
+    color: white;
+}
+
+.qrcode-board p {
+    color: white;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.qrcode-img {
+    width: 220px;
+    max-width: 80%;
+    border-radius: 16px;
+    background: white;
+    padding: 12px;
+    margin-bottom: 20px;
+}
+
+.line-join-btn {
+    background-color: #06C755;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.line-join-btn:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
 
 /* 圓點 */
 .carousel-dots {
@@ -337,6 +386,27 @@ h2 {
 
     .step-label {
         font-size: 13px;
+    }
+}
+
+/* 手機版 */
+@media (max-width: 600px) {
+
+    .qrcode-board h2 {
+        font-size: 24px;
+    }
+
+    .qrcode-board p {
+        font-size: 15px;
+    }
+
+    .qrcode-img {
+        width: 180px;
+    }
+
+    .line-join-btn {
+        width: 80%;
+        text-align: center;
     }
 }
 

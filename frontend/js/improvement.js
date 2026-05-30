@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
         const response = await fetch(
-            `/api/inspection/${inspectionId}`
+            `/api/inspections/${inspectionId}`
         );
 
         if (!response.ok) {

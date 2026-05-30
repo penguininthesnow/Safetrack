@@ -95,6 +95,29 @@ body {
     transition: 0.2s;
 }
 
+/* 改善狀態 */
+.status {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.status.pending {
+    background-color: #ef4444;
+    color: white;
+}
+
+.status.processing {
+    background-color: #facc15;
+    color: black;
+}
+
+.status.done {
+    background-color: #22c55e;
+    color: white;
+}
+
 /* 搜尋按鈕 */
 #searchBtn {
     background-color: #4CAF50;

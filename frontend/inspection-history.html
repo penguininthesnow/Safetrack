@@ -103,6 +103,17 @@
         </select>
     </div>
 
+    <div class="filter-group">
+        <!-- 改善區塊選擇 -->
+        <label for="statusFilter">改善狀態:</label>
+        <select id="statusFilter">
+            <option value="">全部</option>
+            <option value="pending">未改善</option>
+            <option value="processing">改善中</option>
+            <option value="done">已完成</option>
+        </select>
+    </div>
+
     <div class="filter-actions">
         <button id="searchBtn">搜尋</button>
         <button id="downloadCsvBtn">下載 csv.</button>
@@ -126,6 +137,7 @@
                     <th>項目</th>
                     <th>異常</th>
                     <th>說明</th>
+                    <th>改善狀態</th>
                     <th>功能操作</th>
                 </tr>
             </thead>

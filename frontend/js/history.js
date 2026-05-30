@@ -162,7 +162,16 @@ function renderTable(data) {
         <td>${ins.item}</td>
         <td>${ins.is_abnormal ? "異常" : "正常"}</td>
         <td>${ins.description}</td>
+        <td>
+            <span class="status ${ins.status || "pending"}">
+                ${getStatusText(ins.status || "pending")}
+            </span>
+        </td>
         <td class="action-buttons">
+            <button onclick="goToImprovement(${ins.id})">
+                改善追蹤
+            </button>
+
             <button class="preview-btn" onclick="previewInspection('${ins.inspection_number}')">預覽</button>
             <button class="edit-btn" onclick="editInspection(${ins.id})">修改</button>
             <button class="delete-btn" onclick="deleteInspection(${ins.id})">刪除</button>
@@ -171,6 +180,24 @@ function renderTable(data) {
         tbody.appendChild(tr);
     });
 
+}
+
+// 改善選項的文字動態轉換
+function getStatusText(status) {
+    switch (status) {
+        case "pending":
+            return "未改善";
+        case "processing":
+            return "改善中";
+        case "done":
+            return "已完成";
+        default:
+            return "未改善";
+    }
+}
+// 點擊導覽至改善頁面
+function goToImprovement(id) {
+    window.location.href = `improvement.html?id=${id}`;
 }
 
 // 預覽頁面
@@ -287,12 +314,4 @@ function downloadCsv() {
     document.body.removeChild(link);
 
     URL.revokeObjectURL(url);
-
-    // const encodeUri = encodeURI(csvContent);
-    // const link = document.createElement("a");
-    // link.setAttribute("href", encodeUri);
-    // link.setAttribute("download", "inspection_records.csv");
-    // document.body.appendChild(link);
-    // link.click();
-    // document.body.removeChild(link);
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>改善追蹤 -- SafeTrack</title>
+    <link rel=""stylesheet type="text/css" href="improvement.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>改善追蹤</h1>
+
+        <!-- 原始異常資訊 -->
+        <section class="inspection-info">
+            <h2>異常資訊</h2>
+            <div class="info-item">
+                <label>巡檢編號:</label>
+                <span id="inspectionNumber"></span>
+            </div>
+
+            <div class="info-item">
+                <label>異常說明:</label>
+                <p id="description"></p>
+            </div>
+
+            <div class="info-item">
+                <label>異常照片:</label>
+                <img id="previewImage">
+            </div>
+        </section>
+        <!-- 改善填寫區 -->
+         <section class="improvement-form">
+            <h2>改善內容</h2>
+            <textarea
+                id="improvementText"
+                placeholder="請輸入改善措施">
+            </textarea>
+
+            <input
+                type="file"
+                id="improvementImage">
+            
+            <select id="statusSelect">
+                <option value="pending">
+                    未改善
+                </option>
+                <option value="processing">
+                    改善中
+                </option>
+                <option value="done">
+                    已完成
+                </option>
+            </select>
+
+            <button id="submitBtn">
+                提交改善
+            </button>
+         </section>
+    
+    </div>
+
+    <script src="immprovement.js"></script>
+    
+</body>
+</html>

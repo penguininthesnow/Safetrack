@@ -50,3 +50,23 @@ class Inspection(Base):
     inspection_number = Column(String(13), unique=True, index=True)
 
     owner = relationship("User", back_populates="inspections")
+    improvements = relationship("Improvement", back_populates="inspection")
+
+class Improvement(Base):
+    __tablename__ = "improvements"
+    id = Column(Integer, primary_key=True, index=True)
+
+    inspection_id = Column(Integer, ForeignKey("inspections.id"), nullable=False)
+    # 改善說明
+    improvement_text= Column(Text)
+    # 改善照片
+    improvement_image = Column(String(255))
+    # 改善狀態
+    status =Column(String, default="pending")
+    # 完成日期
+    completed_at = Column(DateTime, nullable=True)
+    # 建立日期
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+    # relationship
+    inspection = relationship("Inspection", back_populates="improvements")

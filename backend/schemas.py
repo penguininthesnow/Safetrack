@@ -94,5 +94,23 @@ class InspectionOut(InspectionBase):
         "from_attributes" : True 
     } 
 
-    # class Config:
-    #     orm_mode = True
+# 改善系統
+class ImprovementBase(BaseModel):
+    improvement_text: Optional[str] = None
+    status: str = "pending"
+
+# 建立
+class ImprovementCreate(ImprovementBase):
+    inspection_id: int
+
+# 回傳
+class ImprovementOut(ImprovementBase):
+    id: int
+    inspection_id: int
+    improvement_image: Optional[str]
+    completed_at: Optional[datetime]
+    created_at: datetime
+    
+    model_config = {
+        "from_attributes": True
+    }

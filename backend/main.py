@@ -9,6 +9,7 @@ from backend.routers.users import router as users_router
 from backend.routers.inspections import router as inspections_router
 from backend.routers.notification_settings import router as notification_settings_router
 from backend.routers.osha import router as osha_router
+from backend.routers.improvements import router as improvements_router
 
 
 print(engine.url) #查找資料庫
@@ -49,6 +50,7 @@ app.include_router(users_router)
 app.include_router(inspections_router)
 app.include_router(notification_settings_router)
 app.include_router(osha_router)
+app.include_router(improvements_router)
 
 print("=== ROUTES ===")
 for route in app.routes:

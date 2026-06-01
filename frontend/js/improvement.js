@@ -38,5 +38,43 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // console.log("improvement.js loaded");
 
+// 提交改善按鈕設計
+document.getElementById("submitBtn")
+    .addEventListener("click", async () => {
+        try {
+            const improvementText = document.getElementById("improvementText").value;
+            const status = document.getElementById("statusSelect").value;
 
+            // request body
+            const requestData = {
+                inspection_id: Number(inspectionId),
+                improvement_text: improvementText,
+                status: status
+            };
+            console.log(requestData);
+
+
+            // POST API
+            const response = await fetch(
+                "/api/improvements/",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(requestData)
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("提交改善失敗");
+            }
+            const result = await response.json();
+            console.log(result);
+            alert("改善資料提交成功!")
+        } catch (error) {
+            console.error(error);
+            alert("提交失敗~");
+        }
+    });
 

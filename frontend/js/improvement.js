@@ -1,7 +1,8 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    const params = new URLSearchParams(window.location.search);
+const params = new URLSearchParams(window.location.search);
 
-    const inspectionId = params.get("id");
+const inspectionId = params.get("id");
+// 載入頁面資料    
+document.addEventListener("DOMContentLoaded", async () => {
 
     console.log("inspectionId:", inspectionId);
 

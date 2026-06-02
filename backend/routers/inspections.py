@@ -227,7 +227,27 @@ def get_inspections(
         query = query.filter(models.Inspection.item.contains(item))
     if is_abnormal is not None:
         query = query.filter(models.Inspection.is_abnormal == is_abnormal)
-    return query.order_by(models.Inspection.date.desc()).all()
+    
+    inspections = query.order_by(
+        models.Inspection.date.desc()
+    ).all()
+    
+    # 同步改善狀態
+    for inspection in inspections:
+        latest_improvement = db.query(
+            models.Improvement
+        ).filter(
+            models.Improvement.inspection_id == inspection.id
+        ).order_by(
+            models.Improvement.created_at.desc()
+        ).first()
+
+        inspection.status = (
+            latest_improvement.status
+            if latest_improvement
+            else "pending"
+        )
+    return inspections
 
 
 # 會員頁面

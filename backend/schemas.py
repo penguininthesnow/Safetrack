@@ -90,6 +90,8 @@ class InspectionOut(InspectionBase):
     created_by: int
     inspection_number: str
 
+    status: Optional[str] = "pending"
+
     model_config = {
         "from_attributes" : True 
     } 

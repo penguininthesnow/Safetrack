@@ -72,7 +72,9 @@ document.getElementById("submitBtn")
             }
             const result = await response.json();
             console.log(result);
-            alert("改善資料提交成功!")
+            alert("改善資料提交成功!");
+
+            window.location.href = "/inspection-history.html";
         } catch (error) {
             console.error(error);
             alert("提交失敗~");

@@ -70,3 +70,15 @@ class Improvement(Base):
 
     # relationship
     inspection = relationship("Inspection", back_populates="improvements")
+
+    images = relationship("ImprovementImage", back_populates="improvement")
+
+# 改善圖片
+class ImprovementImage(Base):
+    __tablename__ = "improvement_images"
+    id = Column(Integer, primary_key=True)
+
+    improvement_id = Column(Integer, ForeignKey("improvements.id"), nullable=False)
+    image_url = Column(String(255), nullable=False)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    improvement = relationship("Improvement", back_populates= "images")

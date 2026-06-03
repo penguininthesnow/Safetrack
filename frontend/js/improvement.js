@@ -1,6 +1,17 @@
 const params = new URLSearchParams(window.location.search);
 
 const inspectionId = params.get("id");
+
+// 改善圖片
+const imageInput =
+    document.getElementById("improvementImage");
+imageInput.addEventListener("change", () => {
+    if (imageInput.files.length > 3) {
+        alert("最多只能上傳 3 張圖片");
+        imageInput.value = "";
+    }
+});
+
 // 載入頁面資料    
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -46,24 +57,23 @@ document.getElementById("submitBtn")
             const improvementText = document.getElementById("improvementText").value;
             const status = document.getElementById("statusSelect").value;
 
-            // request body
-            const requestData = {
-                inspection_id: Number(inspectionId),
-                improvement_text: improvementText,
-                status: status
-            };
-            console.log(requestData);
+            const formData = new FormData();
+            formData.append("inspection_id", Number(inspectionId));
+            formData.append("improvement_text", improvementText);
+            formData.append("status", status);
 
+            // 上傳多張圖片
+            const files = document.getElementById("improvementImage").files;
+            for (let i = 0; i < files.length; i++) {
+                formData.append("images", files[i]);
+            }
 
             // POST API
             const response = await fetch(
                 "/api/improvements/",
                 {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(requestData)
+                    body: formData
                 }
             );
 

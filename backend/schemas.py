@@ -109,7 +109,7 @@ class ImprovementCreate(ImprovementBase):
 class ImprovementOut(ImprovementBase):
     id: int
     inspection_id: int
-    improvement_image: Optional[str]
+    # improvement_image: Optional[str]
     completed_at: Optional[datetime]
     created_at: datetime
     

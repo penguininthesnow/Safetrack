@@ -310,9 +310,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 });
 
-
+// 回首頁
 function homepage() {
-    window.location.href = "index.html";
+    window.location.href = "/index.html";
 }
 function gotoInspection() {
     const token = localStorage.getItem("token")

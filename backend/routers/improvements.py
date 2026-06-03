@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, UploadFile, File, Form
 from sqlalchemy.orm import Session
-
+from backend.services.s3 import upload_to_s3
 from backend.database import get_db
 from backend import models, schemas
 
@@ -29,5 +29,12 @@ async def create_improvement(
     db.refresh(new_improvement)
 
     for image in images:
-        print("圖片名稱", image.filename)
+        image_url = upload_to_s3(image)
+        # 建立圖片資料
+        new_image = models.ImprovementImage(
+            improvement_id=new_improvement.id,
+            image_url=image_url
+        )
+        db.add(new_image)
+    db.commit()
     return new_improvement
